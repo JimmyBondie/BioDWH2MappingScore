@@ -49,11 +49,14 @@
             <span class="title">BioDWH2 - GraphQL Playground</span>
         </div>
     </div>
-    <script>window.addEventListener('load', function (event) {
+    <script>
+        window.addEventListener('load', function (event) {
+            var urlParams = new URLSearchParams(window.location.search)
             GraphQLPlayground.init(document.getElementById('root'), {
-                // options as 'endpoint' belong here
+                endpoint: urlParams.has('endpoint') ? urlParams.get('endpoint') : ''
             })
-        })</script>
+        })
+    </script>
 </body>
 
 </html>
