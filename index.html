@@ -1,12 +1,124 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
 
 <head>
-    <title>BioDWH2</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+    integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+  <title>BioDWH2</title>
 </head>
 
-<body>
-    <div>Under Construction</div>
+<body style="padding-top: 55px;">
+  <nav class="navbar navbar-expand-md navbar-light fixed-top bg-light">
+    <img src="assets/BioDWH2-logo.png">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+      aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item active">
+          <a class="nav-link btn btn-outline-secondary" type="button" href="https://github.com/BioDWH2"
+            target="_blank">GitHub</a>
+        </li>
+        <li class="nav-item active ml-1">
+          <a class="nav-link btn btn-outline-secondary" type="button"
+            href="https://github.com/BioDWH2/BioDWH2/blob/master/README.md" target="_blank">Documentation</a>
+        </li>
+        <li class="nav-item active ml-1">
+          <a class="nav-link btn btn-outline-secondary" type="button" href="https://github.com/BioDWH2/BioDWH2/issues"
+            target="_blank">Issues</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <main role="main">
+    <div class="jumbotron py-4">
+      <div class="container">
+        <h1 class="display-4">BioDWH2: An Automated Graph-Based Data Warehouse and Mapping Tool</h1>
+        <object id="jumbotron-svg" type="image/svg+xml" data="assets/graph.svg"
+          style="width: 120px; height: 120px; float: left; margin-right: 16px;"></object>
+        <p>
+          BioDWH2 is an easy-to-use, automated, graph-based data warehouse and mapping tool for bioinformatics and
+          medical informatics. It is developed to be usable out of the box without any prerequisites except a suitable
+          Java Runtime.
+        </p>
+        <p>
+          <a class="btn btn-primary" href="https://github.com/BioDWH2/BioDWH2/releases/latest" role="button"
+            target="_blank">Download latest release</a>
+          <a class="btn btn-outline-primary" href="https://github.com/BioDWH2/BioDWH2/blob/master/README.md"
+            role="button" target="_blank">Getting started
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+              <path fill-rule="evenodd"
+                d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z" />
+            </svg>
+          </a>
+        </p>
+        <span style="clear: both;"></span>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <div id="workspace-icon" style="width: 64px; height: 64px; float: left; margin-right: 8px;"></div>
+          <h2 style="line-height: 64px;">Workspace</h2>
+          <p style="clear: both;">The simple and clean workspace structure helps you keep all data in one place. Easily
+            configure which data sources you need and BioDWH2 will take care of the rest.</p>
+        </div>
+        <div class="col">
+          <div id="uptodate-icon" style="width: 64px; height: 64px; float: left; margin-right: 8px;"></div>
+          <h2 style="line-height: 64px;">Up-To-Date</h2>
+          <p style="clear: both;">Make use of the latest information with automated data source updates. BioDWH2 checks
+            for new data source versions and can update them if necessary. Wish to keep the workspace as it is at the
+            end of a research project? No problem, updates can easily be disabled.</p>
+        </div>
+      </div>
+      <div class="row mt-4">
+        <div class="col">
+          <div id="mapped-icon" style="width: 64px; height: 64px; float: left; margin-right: 8px;"></div>
+          <h2 style="line-height: 64px;">Mapped</h2>
+          <p style="clear: both;">The data source modules of BioDWH2 provide mapping descriptions for the most common
+            entities and relationships. A mapping layer is generated automatically, connecting heterogeneous data sources
+            and helping to uncover new and meaningful information.</p>
+        </div>
+        <div class="col">
+          <div id="readyforanalysis-icon" style="width: 64px; height: 64px; float: left; margin-right: 8px;"></div>
+          <h2 style="line-height: 64px;">Ready for Analysis</h2>
+          <p style="clear: both;">The resulting graph database is ready to be analyzed with your favorite tools.
+            Starting from the mapping layer, or diving deep into the data sources, all in one graph.</p>
+        </div>
+      </div>
+      <hr>
+    </div>
+  </main>
+  <footer class="container">
+    <a href="https://agbi.techfak.uni-bielefeld.de" target="_blank">
+      <img src="assets/ag_bioinformatics_logo.png" style="float: right;">
+    </a>
+    <p>&copy; 2021 - Bioinformatics/Medical Informatics department at Bielefeld University</p>
+    <span style="clear: both;"></span>
+  </footer>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
+    crossorigin="anonymous"></script>
+
+  <script src="//cdn.jsdelivr.net/npm/vivus@latest/dist/vivus.min.js"></script>
+
+  <script>
+    window.addEventListener('load', function() {
+      new Vivus('jumbotron-svg', { duration: 75, type: 'delayed' }, function() {
+        new Vivus('workspace-icon', { duration: 100, type: 'delayed', file: 'assets/workspace.svg' }, function() { });
+        new Vivus('uptodate-icon', { duration: 100, type: 'delayed', file: 'assets/uptodate.svg' }, function() { });
+        new Vivus('mapped-icon', { duration: 100, type: 'delayed', file: 'assets/mapped.svg' }, function() { });
+        new Vivus('readyforanalysis-icon', { duration: 100, type: 'delayed', file: 'assets/readyforanalysis.svg' }, function() { });
+      });
+    }, false);
+  </script>
 </body>
 
 </html>
