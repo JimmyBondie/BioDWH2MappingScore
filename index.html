@@ -4,38 +4,41 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
-    integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
   <title>BioDWH2</title>
 </head>
 
 <body style="padding-top: 55px;">
   <nav class="navbar navbar-expand-md navbar-light fixed-top bg-light">
-    <img src="assets/BioDWH2-logo.png">
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
-      aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-      <ul class="navbar-nav ml-auto">
-        <li class="nav-item active">
-          <a class="nav-link btn btn-outline-secondary" type="button" href="https://github.com/BioDWH2"
-            target="_blank">GitHub</a>
-        </li>
-        <li class="nav-item active ml-1">
-          <a class="nav-link btn btn-outline-secondary" type="button"
-            href="https://github.com/BioDWH2/BioDWH2/blob/master/README.md" target="_blank">Documentation</a>
-        </li>
-        <li class="nav-item active ml-1">
-          <a class="nav-link btn btn-outline-secondary" type="button" href="https://github.com/BioDWH2/BioDWH2/issues"
-            target="_blank">Issues</a>
-        </li>
-      </ul>
+    <div class="container-fluid">
+      <img src="assets/BioDWH2-logo.png">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
+        aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarText">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item active">
+            <a class="nav-link btn btn-outline-secondary" type="button" href="https://github.com/BioDWH2"
+              target="_blank">GitHub</a>
+          </li>
+          <li class="nav-item active ms-1">
+            <a class="nav-link btn btn-outline-secondary" type="button"
+              href="https://github.com/BioDWH2/BioDWH2/blob/master/README.md" target="_blank">Documentation</a>
+          </li>
+          <li class="nav-item active ms-1">
+            <a class="nav-link btn btn-outline-secondary" type="button" href="https://github.com/BioDWH2/BioDWH2/issues"
+              target="_blank">Issues</a>
+          </li>
+        </ul>
+      </div>
     </div>
   </nav>
   <main role="main">
-    <div class="jumbotron py-4">
-      <div class="container">
+    
+    <div class="mb-4" style="background-color: #EAECEF !important;">
+      <div class="container-fluid py-4" style="max-width: 1150px;">
         <h1 class="display-4">BioDWH2: An Automated Graph-Based Data Warehouse and Mapping Tool</h1>
         <object id="jumbotron-svg" type="image/svg+xml" data="assets/graph.svg"
           style="width: 120px; height: 120px; float: left; margin-right: 16px;"></object>
@@ -63,7 +66,7 @@
         <span style="clear: both;"></span>
       </div>
     </div>
-    <div class="container">
+    <div class="container-fluid" style="max-width: 1150px;">
       <div class="row">
         <div class="col">
           <div id="workspace-icon" style="width: 64px; height: 64px; float: left; margin-right: 8px;"></div>
@@ -95,9 +98,30 @@
         </div>
       </div>
       <hr>
+      <div class="row">
+        <div class="col">
+          <h2 >Citing BioDWH2</h2>
+          <p>
+            If you make use of BioDWH2 or it's companion tools as part or your research cite the BioDWH2 manuscript in any resulting publications.
+          </p>
+          <div class="alert alert-dark">
+            <em>Friedrichs, M. (2021). BioDWH2: an automated graph-based data warehouse and mapping tool. Journal of Integrative Bioinformatics.</em>
+            <br/>
+            <em><a href="https://doi.org/10.1515/jib-2020-0033">DOI: 10.1515/jib-2020-0033</a></em>
+          </div>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col">
+          <h2 >Worflow Overview</h2>
+          <img src="assets/BioDWH-complete-overview.png" class="img-fluid mt-1" />
+        </div>
+      </div>
+      <hr>
     </div>
   </main>
-  <footer class="container">
+  <footer class="container-fluid" style="max-width: 1150px;">
     <a href="https://agbi.techfak.uni-bielefeld.de" target="_blank">
       <img src="assets/ag_bioinformatics_logo.png" style="float: right;">
     </a>
@@ -105,11 +129,8 @@
     <span style="clear: both;"></span>
   </footer>
 
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-    crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
     crossorigin="anonymous"></script>
 
   <script src="//cdn.jsdelivr.net/npm/vivus@latest/dist/vivus.min.js"></script>
