@@ -109,7 +109,7 @@
     }
     for (var i = 0; i < node.ids.length; i++) {
       var color = idOverlap[node.ids[i]] > 1 ? 'bg-info text-dark' : 'bg-light text-dark';
-      text += '<span class="badge rounded-pill ' + color + '">' + node.ids[i] + '</span>';
+      text += '<span class="badge rounded-pill ' + color + ' id-pill" style="border-style: solid; border-color: black; border-width: 0px">' + node.ids[i] + '</span>';
     }
     text += '<br/><strong>Names:</strong> ';
     for (var i = 0; i < node.names.length; i++) {
@@ -138,6 +138,16 @@
         mappingContent.innerHTML = '<div class="alert alert-success" role="alert">' +
           'Loaded ' + Object.keys(window.mappingTrees).length + ' mapping clusters' +
           '</div>' + createTreeTableRecursive(window.mappingTrees[484125924681442]);
+        var idPills = document.getElementsByClassName('id-pill');
+        for (var i = 0; i < idPills.length; i++) {
+          idPills[i].addEventListener('click', (e) => {
+            for (var j = 0; j < idPills.length; j++) {
+              if (idPills[j].innerText === e.target.innerText){
+                idPills[j].style.borderWidth = idPills[j].style.borderWidth == '0px' ? '1px' : '0px';
+              }
+            }
+          });
+        }
       };
       reader.readAsText(file);
     });
