@@ -51,6 +51,7 @@
           <div class="input-group mx-1" style="width: 400px">
             <input type="file" class="form-control" id="mappingLogInput" aria-label="Select mapping log file">
           </div>
+          <div id="mappingInfo"></div>
           <div id="mappingContent"></div>
         </div>
       </div>
@@ -75,6 +76,23 @@
 
   <script>
   window.mappingTrees = {};
+
+  function loadCluster(id) {
+    var node = window.mappingTrees[id];
+    var mappingContent = document.getElementById('mappingContent');
+    mappingContent.innerHTML = '<h3>Mapping cluster ' + id + ' (' + node.label + ')</h3>' +
+      createTreeTableRecursive(node);
+    var idPills = document.getElementsByClassName('id-pill');
+    for (var i = 0; i < idPills.length; i++) {
+      idPills[i].addEventListener('click', (e) => {
+        for (var j = 0; j < idPills.length; j++) {
+          if (idPills[j].innerText === e.target.innerText) {
+            idPills[j].style.borderWidth = idPills[j].style.borderWidth == '0px' ? '1px' : '0px';
+          }
+        }
+      });
+    }
+  }
 
   function createTreeTableRecursive(node) {
     var text = '<table class="table table-bordered border-primary"><tbody>';
@@ -121,33 +139,35 @@
   }
 
   window.addEventListener('load', function() {
-    var mappingContent = document.getElementById('mappingContent');
+    var mappingInfo = document.getElementById('mappingInfo');
     var input = document.getElementById('mappingLogInput');
     input.addEventListener('change', function() {
       var file = this.files[0];
       var reader = new FileReader();
       reader.onload = function(progressEvent) {
+        var labels = [];
         var lines = this.result.split('\n');
         for(var line = 0; line < lines.length; line++) {
           var tree = JSON.parse(lines[line]);
           // Ignore singleton mapped nodes (just one source node connected to a mapped node)
           if (tree.children.length > 2) {
             window.mappingTrees[tree.id] = tree;
+            if (labels.indexOf(tree.label) == -1) {
+              labels.push(tree.label);
+            }
           }
         }
-        mappingContent.innerHTML = '<div class="alert alert-success" role="alert">' +
-          'Loaded ' + Object.keys(window.mappingTrees).length + ' mapping clusters' +
-          '</div>' + createTreeTableRecursive(window.mappingTrees[484125924681442]);
-        var idPills = document.getElementsByClassName('id-pill');
-        for (var i = 0; i < idPills.length; i++) {
-          idPills[i].addEventListener('click', (e) => {
-            for (var j = 0; j < idPills.length; j++) {
-              if (idPills[j].innerText === e.target.innerText){
-                idPills[j].style.borderWidth = idPills[j].style.borderWidth == '0px' ? '1px' : '0px';
-              }
-            }
-          });
+        var infoText = '<div class="alert alert-success" role="alert">Loaded ' + Object.keys(window.mappingTrees).length + ' mapping clusters</div>';
+        infoText += '<table class="table table-bordered"><tbody><tr>';
+        for (let i = 0; i < labels.length; i++) {
+          var clusterForLabel = Object.keys(window.mappingTrees).filter((id) => window.mappingTrees[id].label === labels[i]).map((id) => [id, window.mappingTrees[id].ids.length]);
+          var topTenForLabel = clusterForLabel.sort((a, b) => b[1] - a[1]).slice(0, 10);
+          infoText += '<td><strong>' + labels[i] + ' (' + clusterForLabel.length + ')</strong><br/><ul>';
+          infoText += topTenForLabel.map((x) => '<li><a href="#mappingContent" onclick="loadCluster(' + x[0] + ')">' + x[0] + ' (' + x[1] + ')</a></li>').join('')
+          infoText += '</ul></td>';
         }
+        infoText += '</tr></tbody></table>';
+        mappingInfo.innerHTML = infoText;
       };
       reader.readAsText(file);
     });
