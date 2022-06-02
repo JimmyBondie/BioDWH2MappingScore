@@ -4,8 +4,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="icon" type="image/png" href="assets/favicon.png">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
   <title>BioDWH2</title>
   <style>
     .links a:link,
@@ -70,7 +72,6 @@
         <p>
           <img src="https://img.shields.io/github/license/BioDWH2/BioDWH2">
           <img src="https://img.shields.io/github/v/release/BioDWH2/BioDWH2?label=BioDWH2">
-          <img src="https://img.shields.io/github/v/release/BioDWH2/BioDWH2-Neo4j-Server?label=BioDWH2-Neo4j-Server">
         </p>
         <span style="clear: both;"></span>
       </div>
@@ -109,7 +110,7 @@
       <hr>
       <div class="row">
         <div class="col">
-          <h2 >Citing BioDWH2</h2>
+          <h2>Citing BioDWH2</h2>
           <p>
             If you make use of BioDWH2 or it's companion tools as part or your research cite the BioDWH2 manuscript in any resulting publications.
           </p>
@@ -128,8 +129,80 @@
       <hr>
       <div class="row">
         <div class="col">
-          <h2 >Worflow Overview</h2>
+          <h2>Worflow Overview</h2>
           <img src="assets/BioDWH-complete-overview.png" class="img-fluid mt-1" />
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col">
+          <h2>Analysis &amp; Tools</h2>
+          <table class="table table-striped table-sm text-center">
+            <thead>
+              <tr>
+                <th scope="col" style="border-right: 1px solid black"></th>
+                <th scope="col">BioDWH2-Neo4j-Server</th>
+                <th scope="col">BioDWH2-OrientDB-Server</th>
+                <th scope="col">BioDWH2-ArcadeDB-Server</th>
+                <th scope="col">BioDWH2-GraphQL-Server</th>
+                <th scope="col">BioDWH2-SQL-Exporter</th>
+                <th scope="col" class="fst-italic">Direct GraphML Access</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row" style="border-right: 1px solid black">Version</th>
+                <td><a href="https://github.com/BioDWH2/BioDWH2-Neo4j-Server/releases/latest" target="_blank"><img src="https://img.shields.io/github/v/release/BioDWH2/BioDWH2-Neo4j-Server"></a></td>
+                <td><a href="https://github.com/BioDWH2/BioDWH2-OrientDB-Server/releases/latest" target="_blank"><img src="https://img.shields.io/github/v/release/BioDWH2/BioDWH2-OrientDB-Server"></a></td>
+                <td><a href="https://github.com/BioDWH2/BioDWH2-ArcadeDB-Server/releases/latest" target="_blank"><img src="https://img.shields.io/github/v/release/BioDWH2/BioDWH2-ArcadeDB-Server"></a></td>
+                <td><a href="https://github.com/BioDWH2/BioDWH2-GraphQL-Server/releases/latest" target="_blank"><img src="https://img.shields.io/github/v/release/BioDWH2/BioDWH2-GraphQL-Server"></a></td>
+                <td><a href="https://github.com/BioDWH2/BioDWH2-SQL-Exporter/releases/latest" target="_blank"><img src="https://img.shields.io/github/v/release/BioDWH2/BioDWH2-SQL-Exporter"></a></td>
+                <td>-</td>
+              </tr>
+              <tr>
+                <th scope="row" style="border-right: 1px solid black">Database</th>
+                <td><a href="https://neo4j.com" target="_blank" rel="noopener norefferer">Neo4j</a> Embedded</td>
+                <td><a href="https://orientdb.com" target="_blank" rel="noopener norefferer">OrientDB</a> Embedded</td>
+                <td><a href="https://arcadedb.com" target="_blank" rel="noopener norefferer">ArcadeDB</a> Embedded</td>
+                <td>BioDWH2 Graph + <a href="https://www.graphql-java.com" target="_blank" rel="noopener norefferer">GraphQL Java</a></td>
+                <td>(Depending on used SQL server)</td>
+                <td>-</td>
+              </tr>
+              <tr>
+                <th scope="row" style="border-right: 1px solid black">Interface</th>
+                <td>Neo4j Browser</td>
+                <td>OrientDB Studio</td>
+                <td>ArcadeDB Studio</td>
+                <td><a href="https://github.com/graphql/graphql-playground" target="_blank" rel="noopener noreferrer">GraphQL Playground</a></td>
+                <td>(Depending on used SQL server)</td>
+                <td>-</td>
+              </tr>
+              <tr>
+                <th scope="row" style="border-right: 1px solid black">Commercial Use</th>
+                <td>
+                  <i class="bi bi-exclamation-triangle-fill text-warning"></i><br/>
+                  Depending on use-case<sup><a href="https://neo4j.com/licensing/" target="_blank" rel="noopener norefferer">[ref]</a></sup>
+                </td>
+                <td><i class="bi bi-check-circle-fill text-success"></i></td>
+                <td><i class="bi bi-check-circle-fill text-success"></i></td>
+                <td><i class="bi bi-check-circle-fill text-success"></i></td>
+                <td>
+                  <i class="bi bi-check-circle-fill text-success"></i><br/>
+                  (Depending on used SQL server)
+                </td>
+                <td><i class="bi bi-check-circle-fill text-success"></i></td>
+              </tr>
+              <tr>
+                <th scope="row" style="border-right: 1px solid black">Limitations</th>
+                <td>-</td>
+                <td>-</td>
+                <td>No array property indices</td>
+                <td>-</td>
+                <td>Name length limits</td>
+                <td>No DBMS</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
       <hr>
