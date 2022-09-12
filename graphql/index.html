@@ -4,119 +4,67 @@
 <head>
     <meta charset=utf-8 />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>BioDWH2 - GraphQL Playground</title>
-    <!-- <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/graphql-playground-react/build/static/css/index.css" /> -->
-    <link rel="shortcut icon" href="//cdn.jsdelivr.net/npm/graphql-playground-react/build/favicon.png" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <script src="//cdn.jsdelivr.net/npm/graphql-playground-react/build/static/js/middleware.js"></script>
+    <title>BioDWH2 - GraphiQL</title>
+    <link rel="shortcut icon" href="https://cdn.jsdelivr.net/npm/graphql-playground-react/build/favicon.png" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/graphiql@2.0.7/graphiql.min.css" integrity="sha256-gQryfbGYeYFxnJYnfPStPYFt0+uv8RP8Dm++eh00G9c=" crossorigin="anonymous">
     <style>
         html,
-        body,
-        p,
-        a,
-        h1,
-        h2,
-        h3,
-        h4,
-        ul,
-        pre,
-        code {
+        body {
             margin: 0;
             padding: 0;
             color: inherit;
-        }
-
-        a:active,
-        a:focus,
-        button:focus,
-        input:focus {
-            outline: none;
-        }
-
-        input,
-        button,
-        submit {
-            border: none;
-        }
-
-        input,
-        button,
-        pre {
-            font-family: 'Open Sans', sans-serif;
-        }
-
-        code {
-            font-family: Consolas, monospace;
+            width: 100%;
+            height: 100%;
         }
     </style>
 </head>
 
-<body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+<body style="display: flex; flex-direction: column;">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" style="flex: 0 0">
         <img src="../assets/BioDWH2-logo.svg" style="height: 38px">
         <div style="height: 32px; width: 2px; background-color: #000;" class="mx-2"></div>
         <img src="./assets/GraphQL_Logo.svg" style="height: 38px">
-        <ul class="navbar-nav ml-4 mr-auto">
+        <span class="navbar-brand  ml-4 mb-0 h1">BioDWH2 - Graph<i>i</i>QL</span>
+        <ul class="navbar-nav ms-auto me-2">
             <li class="nav-item">
-                BioDWH2 - GraphQL Playground
-            </li>
-        </ul>
-        <ul class="navbar-nav">
-            <li class="nav-item">
-                <a class="nav-link" href="https://github.com/BioDWH2" target="_blank">GitHub</a>
+                <a class="nav-link btn btn-outline-secondary" href="https://github.com/BioDWH2" target="_blank">GitHub</a>
             </li>
         </ul>
     </nav>
-    <div class="container-fluid h-100 px-0">
-        <div id="root">
-            <style>
-                #root {
-                    height: 100%;
-                    width: 100%;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                }
-
-                .loading {
-                    font-size: 32px;
-                    font-weight: 200;
-                    color: rgba(255, 255, 255, .6);
-                    margin-left: 20px;
-                }
-
-                img {
-                    width: 78px;
-                    height: 78px;
-                }
-
-                .title {
-                    font-weight: 400;
-                }
-            </style>
-            <img src='//cdn.jsdelivr.net/npm/graphql-playground-react/build/logo.png' alt=''>
-            <div class="loading"> Loading
-                <span class="title">BioDWH2 - GraphQL Playground</span>
-            </div>
-        </div>
+    <div class="input-group px-3 py-1 mx-auto" style="max-width: 500px">
+        <span class="input-group-text" id="endpoint-label">Endpoint</span>
+        <input type="text" class="form-control" aria-label="GraphQL endpoint" aria-describedby="endpoint-label" id="connect-endpoint">
+        <button class="btn btn-primary" type="button" id="connect-button">Connect</button>
     </div>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-        crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-        crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-        crossorigin="anonymous"></script>
+    <div id="graphiql" style="flex: 1 0">
+        <div class="text-center">Please connect to an endpoint above</div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/react@17.0.2/umd/react.production.min.js" integrity="sha256-Ipu/TQ50iCCVZBUsZyNJfxrDk0E2yhaEIz0vqI+kFG8=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/react-dom@17.0.2/umd/react-dom.production.min.js" integrity="sha256-nbMykgB6tsOFJ7OdVmPpdqMFVk4ZsqWocT6issAPUF0=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/graphiql@2.0.7/graphiql.min.js" integrity="sha256-qQ6pw7LwTLC+GfzN+cJsYXfVWRKH9O5o7+5H96gTJhQ=" crossorigin="anonymous"></script>
     <script>
-        window.addEventListener('load', function(event) {
-            var urlParams = new URLSearchParams(window.location.search)
-            GraphQLPlayground.init(document.getElementById('root'), {
-                endpoint: urlParams.has('endpoint') ? urlParams.get('endpoint') : ''
-            })
-        })
+        function connect(endpointUrl) {
+            ReactDOM.render(
+                React.createElement(GraphiQL, {
+                    fetcher: GraphiQL.createFetcher({url: endpointUrl}),
+                    defaultEditorToolsVisibility: true,
+                }),
+                document.getElementById('graphiql'),
+            );
+        }
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.has('endpoint')) {
+            document.getElementById('connect-endpoint').value = urlParams.get('endpoint');
+            connect(document.getElementById('connect-endpoint').value);
+        } else {
+            document.getElementById('connect-endpoint').value = 'http://localhost:8090';
+        }
+        document.getElementById('connect-button').addEventListener('click', function() {
+            connect(document.getElementById('connect-endpoint').value);
+        });
     </script>
 </body>
 
