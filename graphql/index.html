@@ -6,8 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>BioDWH2 - GraphiQL</title>
     <link rel="shortcut icon" href="https://cdn.jsdelivr.net/npm/graphql-playground-react/build/favicon.png" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/graphiql@2.0.7/graphiql.min.css" integrity="sha256-gQryfbGYeYFxnJYnfPStPYFt0+uv8RP8Dm++eh00G9c=" crossorigin="anonymous">
     <style>
         html,
@@ -17,31 +15,78 @@
             color: inherit;
             width: 100%;
             height: 100%;
+            font-family: Roboto;
+            font-weight: 400;
+        }
+        .btn {
+            border: 1px solid #404040;
+            padding: 6px 8px;
+            border-radius: 8px;
+            text-decoration: none;
+            color: black;
+            box-sizing: border-box;
+            font-size: 18px;
+        }
+        .btn:hover {
+            background-color: #E0E0E0;
+            cursor: pointer;
+        }
+        .btn.btn-primary {
+            background-color: #789339;
+            color: white;
+        }
+        .btn.btn-primary:hover {
+            background-color: #586B29;
+            color: white;
+        }
+        .input-group {
+            display: flex;
+            flex-direction: row;
+        }
+        .input-group .input-group-text {
+            border: 1px solid #404040;
+            background-color: #E0E0E0;
+            padding: 8px;
+            border-radius: 8px 0 0 8px;
+            text-decoration: none;
+            color: black;
+            box-sizing: border-box;
+            height: 38px;
+        }
+        .input-group .form-control {
+            border-top: 1px solid #404040;
+            border-bottom: 1px solid #404040;
+            border-left: 0;
+            border-right: 0;
+            box-sizing: border-box;
+            height: 38px;
+        }
+        .input-group .btn {
+            border: 1px solid #404040;
+            border-radius: 0 8px 8px 0;
+            height: 38px;
         }
     </style>
 </head>
 
 <body style="display: flex; flex-direction: column;">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light" style="flex: 0 0">
-        <img src="../assets/BioDWH2-logo.svg" style="height: 38px">
-        <div style="height: 32px; width: 2px; background-color: #000;" class="mx-2"></div>
-        <img src="./assets/GraphQL_Logo.svg" style="height: 38px">
-        <span class="navbar-brand  ml-4 mb-0 h1">BioDWH2 - Graph<i>i</i>QL</span>
-        <ul class="navbar-nav ms-auto me-2">
-            <li class="nav-item">
-                <a class="nav-link btn btn-outline-secondary" href="https://github.com/BioDWH2" target="_blank">GitHub</a>
-            </li>
-        </ul>
+    <nav style="flex: 0 0; background-color: #F0F0F0; display: flex; flex-direction: row; align-items: center; height: 48px">
+        <img src="../assets/BioDWH2-logo.svg" style="height: 38px; margin-left: 8px">
+        <div style="height: 32px; width: 2px; background-color: #000; margin: 0 8px"></div>
+        <img src="./assets/GraphQL_Logo.svg" style="height: 38px; margin-right: 8px">
+        <h3>BioDWH2 - Graph<i>i</i>QL</h3>
+        <div style="flex: 1 0">
+            <div class="input-group" style="max-width: 500px; padding: 2px 8px; margin: 0 auto">
+                <span class="input-group-text" id="endpoint-label">Endpoint</span>
+                <input type="text" class="form-control" aria-label="GraphQL endpoint" aria-describedby="endpoint-label" id="connect-endpoint">
+                <button class="btn btn-primary" type="button" id="connect-button">Connect</button>
+            </div>
+        </div>
+        <a style="margin-right: 8px" class="btn" href="https://github.com/BioDWH2" target="_blank">GitHub</a>
     </nav>
-    <div class="input-group px-3 py-1 mx-auto" style="max-width: 500px">
-        <span class="input-group-text" id="endpoint-label">Endpoint</span>
-        <input type="text" class="form-control" aria-label="GraphQL endpoint" aria-describedby="endpoint-label" id="connect-endpoint">
-        <button class="btn btn-primary" type="button" id="connect-button">Connect</button>
-    </div>
     <div id="graphiql" style="flex: 1 0">
-        <div class="text-center">Please connect to an endpoint above</div>
+        <div style="text-align: center; margin: 8px 0">Please connect to an endpoint above</div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/react@17.0.2/umd/react.production.min.js" integrity="sha256-Ipu/TQ50iCCVZBUsZyNJfxrDk0E2yhaEIz0vqI+kFG8=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/react-dom@17.0.2/umd/react-dom.production.min.js" integrity="sha256-nbMykgB6tsOFJ7OdVmPpdqMFVk4ZsqWocT6issAPUF0=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/graphiql@2.0.7/graphiql.min.js" integrity="sha256-qQ6pw7LwTLC+GfzN+cJsYXfVWRKH9O5o7+5H96gTJhQ=" crossorigin="anonymous"></script>
