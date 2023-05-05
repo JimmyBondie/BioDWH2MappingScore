@@ -1,11 +1,12 @@
 <script setup lang="ts">
+import { useDisplay } from 'vuetify'
 import { RouterView } from 'vue-router'
 </script>
 
 <template>
   <v-app>
-    <v-toolbar>
-      <v-img v-if="$windowWidth >= 500" src="./Logo.svg" max-width="170"></v-img>
+    <v-toolbar color="primary">
+      <v-img v-if="useDisplay().width.value >= 550" src="./Logo.svg" max-width="170"></v-img>
       <v-toolbar-title>Mapping-Spy</v-toolbar-title>
 
       <v-tooltip text="GitHub" location="bottom">
