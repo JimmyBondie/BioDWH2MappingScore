@@ -1,5 +1,7 @@
 <script setup lang="ts"></script>
 
 <template>
-  <main></main>
+  <v-container></v-container>
 </template>
+
+<style lang="scss"></style>
