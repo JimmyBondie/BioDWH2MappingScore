@@ -10,7 +10,7 @@
   </v-container>
 </template>
 
-<script>
+<script lang="ts">
 export default {
   data() {
     return {
@@ -19,14 +19,14 @@ export default {
     }
   },
   watch: {
-    async selectedFile([file]) {
+    async selectedFile([file]: File[]) {
       if (!file) {
         return
       }
 
       this.inProgress = true
       try {
-        const lines = (await file.text()).split('\n')
+        const lines: String[] = (await file.text()).split('\n')
         for (var line in lines) {
           JSON.parse(line)
         }
