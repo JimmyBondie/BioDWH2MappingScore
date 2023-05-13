@@ -56,7 +56,10 @@ import { RouterView } from 'vue-router'
 
       <RouterView />
 
-      <v-footer app>
+      <v-spacer></v-spacer>
+      <v-spacer></v-spacer>
+
+      <v-footer>
         <div class="links">
           &copy; 2023 -
           <a href="https://agbi.techfak.uni-bielefeld.de" target="_blank">
