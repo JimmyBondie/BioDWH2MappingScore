@@ -1,23 +1,29 @@
 <script setup lang="ts">
 import LabelBoard from '@/components/LabelBoard.vue'
+import { MappingNodeList } from '@/lib/classes'
 </script>
 
 <template>
-  <v-container>
-    <v-file-input accept=".json" label="File input" v-model="selectedFile"></v-file-input>
+  <main>
+    <v-container>
+      <v-file-input accept=".json" label="File input" v-model="selectedFile"></v-file-input>
 
-    <v-overlay v-model="inProgress" persistent class="align-center justify-center"
-      ><v-progress-circular indeterminate size="64" color="primary"></v-progress-circular
-    ></v-overlay>
+      <v-overlay v-model="inProgress" persistent class="align-center justify-center"
+        ><v-progress-circular indeterminate size="64" color="primary"></v-progress-circular
+      ></v-overlay>
 
-    <v-tabs v-model="labelNodes">
-      <v-tab v-for="[label, nodes] of manager.nodesPerLabel" :key="label" :value="nodes">
-        {{ label }}
-      </v-tab>
-    </v-tabs>
+      <v-tabs v-model="labelNodes">
+        <v-tab v-for="label in manager.nodesPerLabel.keys()" :key="label" :value="label">
+          {{ label }}
+        </v-tab>
+      </v-tabs>
+    </v-container>
 
-    <LabelBoard v-if="labelNodes != null" :nodeList="labelNodes"></LabelBoard>
-  </v-container>
+    <LabelBoard
+      v-if="labelNodes != ''"
+      :nodeList="(manager.nodesPerLabel.get(labelNodes) as MappingNodeList)"
+    ></LabelBoard>
+  </main>
 </template>
 
 <script lang="ts">
@@ -27,7 +33,7 @@ export default {
     return {
       inProgress: false,
       selectedFile: [],
-      labelNodes: null,
+      labelNodes: '',
       manager: new MappingManager()
     }
   },

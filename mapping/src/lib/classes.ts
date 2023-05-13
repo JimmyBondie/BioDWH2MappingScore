@@ -5,6 +5,10 @@ export class MappingNodeId {
   constructor(json: any) {
     ;[this.prefix, this.id] = json.split(':')
   }
+
+  public asString() {
+    return this.prefix + ':' + this.id
+  }
 }
 
 export class MappingNodeIdList extends Array<MappingNodeId> {
@@ -33,6 +37,14 @@ export class MappingNode {
     this.__mapped = value ? value : false
     this.children = new MappingNodeList()
     this.children.load(json['children'])
+  }
+
+  public getPrefixes() {
+    const result: Map<string, string> = new Map()
+    for (const id of this.ids) {
+      result.set(id.prefix, '')
+    }
+    return result.keys()
   }
 }
 

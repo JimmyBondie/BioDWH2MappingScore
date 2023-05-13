@@ -8,51 +8,32 @@ defineProps<{
 </script>
 
 <template>
-  <v-container>
-    <v-btn-toggle v-model="nodeListVisible">
-      <v-btn
-        v-if="nodeListVisible"
-        :value="false"
-        prepend-icon="mdi-arrow-collapse-left"
-        variant="text"
-        >Collapse</v-btn
-      >
-      <v-btn
-        v-if="!nodeListVisible"
-        :value="true"
-        append-icon="mdi-arrow-collapse-right"
-        variant="text"
-        >Expand</v-btn
-      ></v-btn-toggle
-    >
-    <v-row>
-      <v-col class="v-col-3" v-if="nodeListVisible">
-        <v-list v-model:selected="selectedNodes">
+  <main>
+    <v-container>
+      <v-select label="Select node" :items="nodeList" v-model="selectedNode">
+        <template v-slot:selection="{ item }">
+          {{ item.value.id + ' (' + item.value.ids.length + ' Ids)' }}
+        </template>
+
+        <template #item="{ item, props }">
           <v-list-item
-            v-for="node in nodeList"
-            :key="node.id"
-            :value="node"
-            :title="node.id"
-            :subtitle="node.ids.length + ' Ids'"
+            v-bind="props"
+            :title="item.value.id"
+            :subtitle="item.value.ids.length + ' Ids'"
           ></v-list-item>
-        </v-list>
-      </v-col>
+        </template>
+      </v-select>
+    </v-container>
 
-      <v-divider vertical v-if="nodeListVisible"></v-divider>
-
-      <v-col
-        ><MappingTree v-if="selectedNodes.length == 1" :node="selectedNodes[0]"></MappingTree>
-      </v-col>
-    </v-row>
-  </v-container>
+    <MappingTree v-if="selectedNode != null" :node="selectedNode"></MappingTree>
+  </main>
 </template>
 
 <script lang="ts">
 export default {
   data() {
     return {
-      selectedNodes: [],
-      nodeListVisible: true
+      selectedNode: null
     }
   }
 }
