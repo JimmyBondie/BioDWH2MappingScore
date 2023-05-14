@@ -18,9 +18,20 @@ export class MappingNodeIdList extends Array<MappingNodeId> {
   }
 }
 
+export class MappingNodeLabel {
+  public readonly source: string
+  public readonly name: string
+  public readonly value: string
+
+  constructor(json: any) {
+    this.value = json
+    ;[this.source, this.name] = json.split('_')
+  }
+}
+
 export class MappingNode {
   public readonly id: number
-  public readonly label: string
+  public readonly label: MappingNodeLabel
   public readonly ids: MappingNodeIdList
   public readonly names: string[]
   public readonly __mapped: Boolean
@@ -28,7 +39,7 @@ export class MappingNode {
 
   constructor(json: any) {
     this.id = json['id']
-    this.label = json['label']
+    this.label = new MappingNodeLabel(json['label'])
     this.ids = new MappingNodeIdList(json['ids'])
     this.names = json['names']
     const value: Boolean = json['mapped']

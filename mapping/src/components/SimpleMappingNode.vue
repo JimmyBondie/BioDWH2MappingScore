@@ -9,7 +9,7 @@ defineProps<{
 </script>
 
 <template>
-  <v-card density="compact" :title="node.label" :subtitle="node.id.toString()">
+  <v-card density="compact" :title="node.label.value" :subtitle="node.id.toString()">
     <v-card-item :subtitle="$t('Ids')">
       <v-chip-group>
         <v-chip

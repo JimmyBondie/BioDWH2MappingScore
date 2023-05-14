@@ -6,10 +6,10 @@ export class MappingManager extends Map<number, MappingNode> {
   private calcNodesPerLabel() {
     const allNodesAndLabels: Map<string, MappingNodeList> = new Map()
     for (const node of this.values()) {
-      if (!allNodesAndLabels.has(node.label)) {
-        allNodesAndLabels.set(node.label, new MappingNodeList())
+      if (!allNodesAndLabels.has(node.label.value)) {
+        allNodesAndLabels.set(node.label.value, new MappingNodeList())
       }
-      allNodesAndLabels.get(node.label)?.push(node)
+      allNodesAndLabels.get(node.label.value)?.push(node)
     }
 
     for (const [label, nodeList] of allNodesAndLabels.entries()) {
