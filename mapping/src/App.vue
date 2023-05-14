@@ -116,7 +116,7 @@ export default {
     }
   },
   methods: {
-    toggleTheme() {
+    toggleTheme(): void {
       if (this.theme == this.themeDark) {
         this.theme = this.themeLight
       } else {

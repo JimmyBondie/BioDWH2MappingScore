@@ -86,13 +86,13 @@ export default {
     }
   },
   methods: {
-    toggleExpanded() {
+    toggleExpanded(): void {
       this.expanded = !this.expanded
     },
-    onClickIdChip(id: string) {
+    onClickIdChip(id: string): void {
       this.selectedNodeIds?.set(id, !this.selectedNodeIds?.get(id))
     },
-    onClickNameChip(name: string) {
+    onClickNameChip(name: string): void {
       this.selectedNodeNames?.set(name, !this.selectedNodeNames?.get(name))
     }
   }

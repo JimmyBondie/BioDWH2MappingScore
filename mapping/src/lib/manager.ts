@@ -3,7 +3,7 @@ import { MappingNode, MappingNodeList } from './classes'
 export class MappingManager extends Map<number, MappingNode> {
   public readonly nodesPerLabel: Map<string, MappingNodeList> = new Map()
 
-  private calcNodesPerLabel() {
+  private calcNodesPerLabel(): void {
     const allNodesAndLabels: Map<string, MappingNodeList> = new Map()
     for (const node of this.values()) {
       if (!allNodesAndLabels.has(node.label.value)) {
@@ -25,7 +25,7 @@ export class MappingManager extends Map<number, MappingNode> {
     }
   }
 
-  public load(json: string) {
+  public load(json: string): void {
     this.clear()
     this.nodesPerLabel.clear()
     const lines: string[] = json.split('\n')
