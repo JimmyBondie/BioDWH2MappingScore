@@ -14,15 +14,15 @@ defineProps<{
       <v-chip-group>
         <v-chip
           class="userSelectNone"
-          size="x-small"
+          size="small"
           :ripple="false"
           v-for="id of node.ids"
           :key="id.value"
           :variant="selectedNodeIds?.get(id.value) ? 'outlined' : undefined"
           @click="onClickIdChip(id.value)"
-          >{{ id.value }}</v-chip
-        ></v-chip-group
-      >
+          >{{ id.value }}
+        </v-chip>
+      </v-chip-group>
     </v-card-item>
 
     <v-expand-transition>
@@ -31,28 +31,34 @@ defineProps<{
           <v-chip-group>
             <v-chip
               class="userSelectNone"
-              size="x-small"
+              size="small"
               :ripple="false"
               v-for="name of node.names"
               :key="name"
               :variant="selectedNodeNames?.get(name) ? 'outlined' : undefined"
               @click="onClickNameChip(name)"
-              >{{ name }}</v-chip
-            ></v-chip-group
-          >
+              >{{ name }}
+            </v-chip>
+          </v-chip-group>
         </v-card-item>
 
         <v-card-item :subtitle="$t('Prefixes')">
           <v-chip-group>
             <v-chip
               class="userSelectNone"
-              size="x-small"
+              size="small"
               :ripple="false"
               v-for="prefix of node.getPrefixes()"
               :key="prefix"
-              >{{ prefix }}</v-chip
-            ></v-chip-group
-          >
+              :text="prefix"
+            >
+              <template v-slot:append>
+                <v-chip class="ma-0 ml-2 text-green" :ripple="false" size="x-small" color="red">
+                  {{ node.getScore(prefix) }}
+                </v-chip>
+              </template>
+            </v-chip>
+          </v-chip-group>
         </v-card-item>
       </div>
     </v-expand-transition>
