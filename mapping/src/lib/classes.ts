@@ -1,13 +1,11 @@
 export class MappingNodeId {
   public readonly prefix: string
   public readonly id: string
+  public readonly value: string
 
   constructor(json: any) {
+    this.value = json
     ;[this.prefix, this.id] = json.split(':')
-  }
-
-  public asString() {
-    return this.prefix + ':' + this.id
   }
 }
 

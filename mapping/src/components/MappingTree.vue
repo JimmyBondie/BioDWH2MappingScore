@@ -4,6 +4,8 @@ import SimpleMappingNode from '@/components/SimpleMappingNode.vue'
 
 defineProps<{
   node: MappingNode
+  selectedNodeIds?: Map<string, boolean>
+  selectedNodeNames?: Map<string, boolean>
 }>()
 </script>
 
@@ -19,19 +21,37 @@ defineProps<{
               borderBottom: node.children[node.children.length - 1] != child
             }"
           >
-            <MappingTree :node="child"></MappingTree>
+            <MappingTree
+              :node="child"
+              :selected-node-ids="internalSelectedNodeIds"
+              :selected-node-names="internalSelectedNodeNames"
+            ></MappingTree>
           </div>
         </td>
 
         <td v-bind:class="{ borderLeft: node.children.length > 0 }" class="pa-4 minimumCol">
-          <SimpleMappingNode :node="node"></SimpleMappingNode>
+          <SimpleMappingNode
+            :node="node"
+            :selected-node-ids="internalSelectedNodeIds"
+            :selected-node-names="internalSelectedNodeNames"
+          ></SimpleMappingNode>
         </td>
       </tr>
     </tbody>
   </v-table>
 </template>
 
-<script lang="ts"></script>
+<script lang="ts">
+export default {
+  data() {
+    return {
+      internalSelectedNodeIds: this.selectedNodeIds != undefined ? this.selectedNodeIds : new Map(),
+      internalSelectedNodeNames:
+        this.selectedNodeNames != undefined ? this.selectedNodeNames : new Map()
+    }
+  }
+}
+</script>
 
 <style lang="scss">
 .minimumCol {
