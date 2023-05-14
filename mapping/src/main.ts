@@ -20,7 +20,8 @@ const i18n = createI18n({
       SelectNode: 'Select node',
       Ids: "Id's",
       Names: 'Names',
-      Prefixes: 'Prefixes'
+      Prefixes: 'Prefixes',
+      Expand: 'Expand'
     },
     de: {
       Theme: 'Farbschema',
@@ -33,7 +34,8 @@ const i18n = createI18n({
       SelectNode: 'Knoten auswählen',
       Ids: 'Ids',
       Names: 'Namen',
-      Prefixes: 'Präfixe'
+      Prefixes: 'Präfixe',
+      Expand: 'Erweitern'
     }
   }
 })

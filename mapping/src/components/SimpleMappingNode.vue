@@ -9,7 +9,7 @@ defineProps<{
 </script>
 
 <template>
-  <v-card :title="node.label" :subtitle="node.id.toString()">
+  <v-card density="compact" :title="node.label" :subtitle="node.id.toString()">
     <v-card-item :subtitle="$t('Ids')">
       <v-chip-group>
         <v-chip
@@ -25,42 +25,64 @@ defineProps<{
       >
     </v-card-item>
 
-    <v-card-item :subtitle="$t('Names')">
-      <v-chip-group>
-        <v-chip
-          class="userSelectNone"
-          size="x-small"
-          :ripple="false"
-          v-for="name of node.names"
-          :key="name"
-          :variant="selectedNodeNames?.get(name) ? 'outlined' : undefined"
-          @click="onClickNameChip(name)"
-          >{{ name }}</v-chip
-        ></v-chip-group
-      >
-    </v-card-item>
+    <v-expand-transition>
+      <div v-show="expanded">
+        <v-card-item :subtitle="$t('Names')">
+          <v-chip-group>
+            <v-chip
+              class="userSelectNone"
+              size="x-small"
+              :ripple="false"
+              v-for="name of node.names"
+              :key="name"
+              :variant="selectedNodeNames?.get(name) ? 'outlined' : undefined"
+              @click="onClickNameChip(name)"
+              >{{ name }}</v-chip
+            ></v-chip-group
+          >
+        </v-card-item>
 
-    <v-card-item :subtitle="$t('Prefixes')">
-      <v-chip-group>
-        <v-chip
-          class="userSelectNone"
-          size="x-small"
-          :ripple="false"
-          v-for="prefix of node.getPrefixes()"
-          :key="prefix"
-          >{{ prefix }}</v-chip
-        ></v-chip-group
-      >
-    </v-card-item>
+        <v-card-item :subtitle="$t('Prefixes')">
+          <v-chip-group>
+            <v-chip
+              class="userSelectNone"
+              size="x-small"
+              :ripple="false"
+              v-for="prefix of node.getPrefixes()"
+              :key="prefix"
+              >{{ prefix }}</v-chip
+            ></v-chip-group
+          >
+        </v-card-item>
+      </div>
+    </v-expand-transition>
+
+    <v-divider></v-divider>
+
+    <v-card-actions>
+      <v-btn @click="toggleExpanded">{{ $t('Expand') }}</v-btn>
+
+      <v-spacer></v-spacer>
+
+      <v-btn
+        :icon="expanded ? 'mdi-chevron-up' : 'mdi-chevron-down'"
+        @click="toggleExpanded"
+      ></v-btn>
+    </v-card-actions>
   </v-card>
 </template>
 
 <script lang="ts">
 export default {
   data() {
-    return {}
+    return {
+      expanded: false
+    }
   },
   methods: {
+    toggleExpanded() {
+      this.expanded = !this.expanded
+    },
     onClickIdChip(id: string) {
       this.selectedNodeIds?.set(id, !this.selectedNodeIds?.get(id))
     },
