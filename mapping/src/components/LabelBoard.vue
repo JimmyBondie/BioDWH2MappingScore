@@ -10,16 +10,16 @@ defineProps<{
 <template>
   <main>
     <v-container>
-      <v-select label="Select node" :items="nodeList" v-model="selectedNode">
+      <v-select :label="$t('SelectNode')" :items="nodeList" v-model="selectedNode">
         <template v-slot:selection="{ item }">
-          {{ item.value.id + ' (' + item.value.ids.length + ' Ids)' }}
+          {{ item.value.id + ' (' + item.value.ids.length + ' ' + $t('Ids') + ')' }}
         </template>
 
         <template #item="{ item, props }">
           <v-list-item
             v-bind="props"
             :title="item.value.id"
-            :subtitle="item.value.ids.length + ' Ids'"
+            :subtitle="item.value.ids.length + ' ' + $t('Ids')"
           ></v-list-item>
         </template>
       </v-select>
