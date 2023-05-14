@@ -21,7 +21,8 @@ const i18n = createI18n({
       Ids: "Id's",
       Names: 'Names',
       Prefixes: 'Prefixes',
-      Expand: 'Expand'
+      Expand: 'Expand',
+      Collapse: 'Collapse'
     },
     de: {
       Theme: 'Farbschema',
@@ -35,7 +36,8 @@ const i18n = createI18n({
       Ids: 'Ids',
       Names: 'Namen',
       Prefixes: 'Präfixe',
-      Expand: 'Erweitern'
+      Expand: 'Erweitern',
+      Collapse: 'Zuklappen'
     }
   }
 })

@@ -60,7 +60,7 @@ defineProps<{
     <v-divider></v-divider>
 
     <v-card-actions>
-      <v-btn @click="toggleExpanded">{{ $t('Expand') }}</v-btn>
+      <v-btn @click="toggleExpanded">{{ expanded ? $t('Collapse') : $t('Expand') }}</v-btn>
 
       <v-spacer></v-spacer>
 
