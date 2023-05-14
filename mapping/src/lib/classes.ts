@@ -34,7 +34,7 @@ export class MappingNode {
   public readonly label: MappingNodeLabel
   public readonly ids: MappingNodeIdList
   public readonly names: string[]
-  public readonly __mapped: Boolean
+  public readonly __mapped: boolean
   public readonly children: MappingNodeList
 
   constructor(json: any) {
@@ -42,7 +42,7 @@ export class MappingNode {
     this.label = new MappingNodeLabel(json['label'])
     this.ids = new MappingNodeIdList(json['ids'])
     this.names = json['names']
-    const value: Boolean = json['mapped']
+    const value: boolean = json['__mapped']
     this.__mapped = value ? value : false
     this.children = new MappingNodeList()
     this.children.load(json['children'])
