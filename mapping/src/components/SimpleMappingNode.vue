@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { MappingNode } from '@/lib/classes'
+import IdScoreDiagram from '@/components/IdScoreDiagram.vue'
 
 defineProps<{
   node: MappingNode
@@ -67,6 +68,10 @@ defineProps<{
 
     <v-card-actions>
       <v-btn @click="toggleExpanded">{{ expanded ? $t('Collapse') : $t('Expand') }}</v-btn>
+      <v-btn @click="onClickAnalyseIdScores">{{ $t('Analyse') }}</v-btn>
+      <v-overlay v-model="showScoreDiagram" class="align-center justify-center">
+        <IdScoreDiagram :node="node"></IdScoreDiagram>
+      </v-overlay>
 
       <v-spacer></v-spacer>
 
@@ -82,7 +87,8 @@ defineProps<{
 export default {
   data() {
     return {
-      expanded: false
+      expanded: false,
+      showScoreDiagram: false
     }
   },
   methods: {
@@ -94,6 +100,9 @@ export default {
     },
     onClickNameChip(name: string): void {
       this.selectedNodeNames?.set(name, !this.selectedNodeNames?.get(name))
+    },
+    onClickAnalyseIdScores(): void {
+      this.showScoreDiagram = true
     }
   }
 }

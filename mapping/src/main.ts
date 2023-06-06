@@ -22,7 +22,9 @@ const i18n = createI18n({
       Names: 'Names',
       Prefixes: 'Prefixes',
       Expand: 'Expand',
-      Collapse: 'Collapse'
+      Collapse: 'Collapse',
+      Analyse: 'Analyse',
+      Score: 'Score'
     },
     de: {
       Theme: 'Farbschema',
@@ -37,7 +39,9 @@ const i18n = createI18n({
       Names: 'Namen',
       Prefixes: 'Präfixe',
       Expand: 'Erweitern',
-      Collapse: 'Zuklappen'
+      Collapse: 'Zuklappen',
+      Analyse: 'Analysieren',
+      Score: 'Punktzahl'
     }
   }
 })
@@ -54,6 +58,13 @@ const vuetify = createVuetify({
 
 // Material Design Icons
 import '@mdi/font/css/materialdesignicons.css'
+
+// eCharts
+import { use } from 'echarts/core'
+import { SVGRenderer } from 'echarts/renderers'
+import { TitleComponent, TooltipComponent, GridComponent } from 'echarts/components'
+import { BarChart } from 'echarts/charts'
+use([SVGRenderer, TitleComponent, TooltipComponent, GridComponent, BarChart])
 
 const app = createApp(App)
 app.use(router)
