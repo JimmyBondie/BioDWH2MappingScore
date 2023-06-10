@@ -8,6 +8,8 @@ import './assets/main.css'
 // Vue-I18n
 import { createI18n } from 'vue-i18n'
 const i18n = createI18n({
+  silentFallbackWarn: true,
+  silentTranslationWarn: true,
   messages: {
     en: {
       Theme: 'Theme',
