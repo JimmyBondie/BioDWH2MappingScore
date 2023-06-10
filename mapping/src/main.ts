@@ -7,46 +7,16 @@ import './assets/main.css'
 
 // Vue-I18n
 import { createI18n } from 'vue-i18n'
+import en from './locales/en.json'
+import de from './locales/de.json'
 const i18n = createI18n({
   silentFallbackWarn: true,
   silentTranslationWarn: true,
   locale: navigator.language,
   fallbackLocale: 'en',
   messages: {
-    en: {
-      Theme: 'Theme',
-      Documentation: 'Documentation',
-      ReportError: 'Report error',
-      BioinformaticsDepartment: 'Bioinformatics/Medical Informatics department',
-      FacultyOfTechnology: 'Faculty of Technology',
-      BielefeldUniversity: 'Bielefeld University',
-      UploadFile: 'Upload file',
-      SelectNode: 'Select node',
-      Ids: "Id's",
-      Names: 'Names',
-      Prefixes: 'Prefixes',
-      Expand: 'Expand',
-      Collapse: 'Collapse',
-      Analyse: 'Analyse',
-      Score: 'Score'
-    },
-    de: {
-      Theme: 'Farbschema',
-      Documentation: 'Dokumentation',
-      ReportError: 'Fehler melden',
-      BioinformaticsDepartment: 'AG Bioinformatik/Medizininformatik',
-      FacultyOfTechnology: 'Technische Fakultät',
-      BielefeldUniversity: 'Universität Bielefeld',
-      UploadFile: 'Datei hochladen',
-      SelectNode: 'Knoten auswählen',
-      Ids: 'Ids',
-      Names: 'Namen',
-      Prefixes: 'Präfixe',
-      Expand: 'Erweitern',
-      Collapse: 'Zuklappen',
-      Analyse: 'Analysieren',
-      Score: 'Punktzahl'
-    }
+    en: en,
+    de: de
   }
 })
 
