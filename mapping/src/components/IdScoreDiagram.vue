@@ -51,9 +51,20 @@ export default {
         data: []
       }
 
+      const badPrefixes: Array<string> = this.node.getBadPrefixes()
       for (const prefix of this.node.getPrefixes()) {
         xAxis.data?.push(prefix)
-        series.data?.push(this.node.getScore(prefix))
+
+        if (badPrefixes.includes(prefix)) {
+          series.data?.push({
+            value: this.node.getScore(prefix),
+            itemStyle: {
+              color: 'red'
+            }
+          })
+        } else {
+          series.data?.push(this.node.getScore(prefix))
+        }
       }
 
       options.xAxis = xAxis

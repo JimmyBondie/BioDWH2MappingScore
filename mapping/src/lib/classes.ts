@@ -1,3 +1,5 @@
+import { abs, mean, std } from 'mathjs'
+
 class Map2Dim<K, V> extends Map<K, Map<K, V>> {
   public getValue(key1: K, key2: K): V | undefined {
     if (!this.has(key1)) {
@@ -151,6 +153,26 @@ export class MappingNode {
       this.calcScores()
     }
     return Math.round(this.scores.get(prefix)?.score || 0)
+  }
+
+  public getBadPrefixes(): Array<string> {
+    const scores: Array<number> = new Array()
+    for (const prefix of this.getPrefixes()) {
+      scores.push(this.getScore(prefix))
+    }
+
+    const meanScore: number = mean(scores)
+    const stdDeviation: number = std(scores, 'unbiased') // 'unbiased' is default
+    const maxDelta: number = 2 * stdDeviation
+
+    const badPrefixes: Array<string> = []
+    for (const prefix of this.getPrefixes()) {
+      if (abs(meanScore - this.getScore(prefix)) > maxDelta) {
+        badPrefixes.push(prefix)
+      }
+    }
+
+    return badPrefixes
   }
 }
 
