@@ -111,6 +111,15 @@ export class MappingNode {
     this.scores = new Map()
   }
 
+  public hasPrefix(prefix: string): boolean {
+    for (const id of this.ids) {
+      if (id.prefix == prefix) {
+        return true
+      }
+    }
+    return false
+  }
+
   public getPrefixes(): IterableIterator<string> {
     const result: Map<string, string> = new Map()
     for (const id of this.ids) {

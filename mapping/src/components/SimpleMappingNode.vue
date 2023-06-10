@@ -68,7 +68,7 @@ defineProps<{
 
     <v-card-actions>
       <v-btn @click="toggleExpanded">{{ expanded ? $t('Collapse') : $t('Expand') }}</v-btn>
-      <v-btn @click="onClickAnalyseIdScores">{{ $t('Analyze') }}</v-btn>
+      <v-btn @click="onClickAnalyzeIdScores">{{ $t('Analyze') }}</v-btn>
       <v-overlay v-model="showScoreDiagram" class="align-center justify-center">
         <IdScoreDiagram :node="node"></IdScoreDiagram>
       </v-overlay>
@@ -101,7 +101,7 @@ export default {
     onClickNameChip(name: string): void {
       this.selectedNodeNames?.set(name, !this.selectedNodeNames?.get(name))
     },
-    onClickAnalyseIdScores(): void {
+    onClickAnalyzeIdScores(): void {
       this.showScoreDiagram = true
     }
   }

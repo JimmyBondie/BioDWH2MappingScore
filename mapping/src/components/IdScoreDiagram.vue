@@ -2,6 +2,7 @@
 import { useTheme } from 'vuetify'
 import { MappingNode } from '@/lib/classes'
 import VChart from 'vue-echarts'
+import TreeAnalysis from '@/components/TreeAnalysis.vue'
 
 defineProps<{
   node: MappingNode
@@ -10,17 +11,34 @@ defineProps<{
 
 <template>
   <main>
-    <v-chart class="chart-full" autoresize :theme="theme" :option="getOptions()"></v-chart>
+    <v-chart
+      class="chart-full"
+      autoresize
+      :theme="theme"
+      :option="getOptions()"
+      @click="onClickChart"
+    ></v-chart>
+
+    <v-overlay v-model="showPrefixAnalysis" class="align-center justify-center">
+      <TreeAnalysis :node="node" :prefix="analyzedPrefix"></TreeAnalysis>
+    </v-overlay>
   </main>
 </template>
 
 <script lang="ts">
-import { BarSeriesOption, EChartsOption, XAXisOption } from 'echarts/types/dist/shared'
+import {
+  BarSeriesOption,
+  ECElementEvent,
+  EChartsOption,
+  XAXisOption
+} from 'echarts/types/dist/shared'
 
 export default {
   data() {
     return {
-      theme: useTheme().global.name
+      theme: useTheme().global.name,
+      showPrefixAnalysis: false,
+      analyzedPrefix: ''
     }
   },
   methods: {
@@ -32,7 +50,8 @@ export default {
         },
         yAxis: {
           type: 'value',
-          name: this.$t('Score')
+          name: this.$t('Score'),
+          triggerEvent: true
         },
         backgroundColor: 'rgb(var(--v-theme-on-surface-variant))',
         tooltip: {
@@ -71,6 +90,10 @@ export default {
       options.series = series
 
       return options
+    },
+    onClickChart(event: ECElementEvent) {
+      this.analyzedPrefix = event.name
+      this.showPrefixAnalysis = true
     }
   }
 }

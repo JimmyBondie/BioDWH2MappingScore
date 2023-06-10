@@ -37,8 +37,8 @@ import '@mdi/font/css/materialdesignicons.css'
 import { use } from 'echarts/core'
 import { SVGRenderer } from 'echarts/renderers'
 import { TitleComponent, TooltipComponent, GridComponent } from 'echarts/components'
-import { BarChart } from 'echarts/charts'
-use([SVGRenderer, TitleComponent, TooltipComponent, GridComponent, BarChart])
+import { BarChart, TreeChart } from 'echarts/charts'
+use([SVGRenderer, TitleComponent, TooltipComponent, GridComponent, BarChart, TreeChart])
 
 const app = createApp(App)
 app.use(router)
