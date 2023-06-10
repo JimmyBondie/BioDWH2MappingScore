@@ -10,6 +10,8 @@ import { createI18n } from 'vue-i18n'
 const i18n = createI18n({
   silentFallbackWarn: true,
   silentTranslationWarn: true,
+  locale: navigator.language,
+  fallbackLocale: 'en',
   messages: {
     en: {
       Theme: 'Theme',
