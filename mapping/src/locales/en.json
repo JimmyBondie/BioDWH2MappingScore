@@ -1,17 +1,17 @@
 {
-  "Theme": "Theme",
-  "Documentation": "Documentation",
-  "ReportError": "Report error",
-  "BioinformaticsDepartment": "Bioinformatics/Medical Informatics department",
-  "FacultyOfTechnology": "Faculty of Technology",
+  "Analyze": "Analyze",
   "BielefeldUniversity": "Bielefeld University",
-  "UploadFile": "Upload file",
-  "SelectNode": "Select node",
+  "BioinformaticsDepartment": "Bioinformatics/Medical Informatics department",
+  "Collapse": "Collapse",
+  "Documentation": "Documentation",
+  "Expand": "Expand",
+  "FacultyOfTechnology": "Faculty of Technology",
   "Ids": "Id's",
   "Names": "Names",
   "Prefixes": "Prefixes",
-  "Expand": "Expand",
-  "Collapse": "Collapse",
-  "Analyze": "Analyze",
-  "Score": "Score"
+  "ReportError": "Report error",
+  "Score": "Score",
+  "SelectNode": "Select node",
+  "Theme": "Theme",
+  "UploadFile": "Upload file"
 }

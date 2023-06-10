@@ -1,17 +1,17 @@
 {
-  "Theme": "Farbschema",
-  "Documentation": "Dokumentation",
-  "ReportError": "Fehler melden",
-  "BioinformaticsDepartment": "AG Bioinformatik/Medizininformatik",
-  "FacultyOfTechnology": "Technische Fakultät",
+  "Analyze": "Analysieren",
   "BielefeldUniversity": "Universität Bielefeld",
-  "UploadFile": "Datei hochladen",
-  "SelectNode": "Knoten auswählen",
+  "BioinformaticsDepartment": "AG Bioinformatik/Medizininformatik",
+  "Collapse": "Zuklappen",
+  "Documentation": "Dokumentation",
+  "Expand": "Erweitern",
+  "FacultyOfTechnology": "Technische Fakultät",
   "Ids": "Ids",
   "Names": "Namen",
   "Prefixes": "Präfixe",
-  "Expand": "Erweitern",
-  "Collapse": "Zuklappen",
-  "Analyze": "Analysieren",
-  "Score": "Punktzahl"
+  "ReportError": "Fehler melden",
+  "Score": "Punktzahl",
+  "SelectNode": "Knoten auswählen",
+  "Theme": "Farbschema",
+  "UploadFile": "Datei hochladen"
 }
