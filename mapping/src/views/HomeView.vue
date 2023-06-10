@@ -20,7 +20,7 @@ import { MappingNodeList } from '@/lib/classes'
     </v-container>
 
     <LabelBoard
-      v-if="labelNodes != ''"
+      v-if="labelNodes != '' && selectedFile.length > 0"
       :nodeList="(manager.nodesPerLabel.get(labelNodes) as MappingNodeList)"
     ></LabelBoard>
   </main>
@@ -40,10 +40,13 @@ export default {
   watch: {
     async selectedFile([file]: File[]) {
       if (!file) {
+        this.selectedFile = []
         this.manager.clear()
+        this.manager.nodesPerLabel.clear()
         return
       }
 
+      this.labelNodes = ''
       this.inProgress = true
       try {
         const text: string = await file.text()
