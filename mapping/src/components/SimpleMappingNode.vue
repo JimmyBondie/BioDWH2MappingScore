@@ -68,7 +68,7 @@ defineProps<{
 
     <v-card-actions>
       <v-btn @click="toggleExpanded">{{ expanded ? $t('Collapse') : $t('Expand') }}</v-btn>
-      <v-btn @click="onClickAnalyseIdScores">{{ $t('Analyse') }}</v-btn>
+      <v-btn @click="onClickAnalyseIdScores">{{ $t('Analyze') }}</v-btn>
       <v-overlay v-model="showScoreDiagram" class="align-center justify-center">
         <IdScoreDiagram :node="node"></IdScoreDiagram>
       </v-overlay>
