@@ -10,7 +10,43 @@ defineProps<{
 </script>
 
 <template>
-  <v-card density="compact" :title="node.label.value" :subtitle="node.id.toString()">
+  <v-card density="compact">
+    <v-row class="flex-nowrap">
+      <v-col>
+        <v-card-title>{{ node.label.value }}</v-card-title>
+        <v-card-subtitle>{{ node.id.toString() }}</v-card-subtitle>
+      </v-col>
+      <v-col class="d-flex justify-end align-center pa-6">
+        <v-tooltip :text="$t('Analyze')" location="bottom">
+          <template v-slot:activator="{ props }">
+            <v-btn
+              v-bind="props"
+              @click="onClickAnalyzeIdScores"
+              density="compact"
+              variant="text"
+              icon="mdi-magnify"
+            >
+            </v-btn>
+            <v-overlay v-model="showScoreDiagram" class="align-center justify-center">
+              <IdScoreDiagram :node="node"></IdScoreDiagram>
+            </v-overlay>
+          </template>
+        </v-tooltip>
+
+        <v-tooltip :text="expanded ? $t('Collapse') : $t('Expand')" location="bottom">
+          <template v-slot:activator="{ props }">
+            <v-btn
+              v-bind="props"
+              density="compact"
+              variant="text"
+              :icon="expanded ? 'mdi-chevron-up' : 'mdi-chevron-down'"
+              @click="toggleExpanded"
+            ></v-btn>
+          </template>
+        </v-tooltip>
+      </v-col>
+    </v-row>
+
     <v-card-item :subtitle="$t('Ids')">
       <v-chip-group>
         <v-chip
@@ -63,23 +99,6 @@ defineProps<{
         </v-card-item>
       </div>
     </v-expand-transition>
-
-    <v-divider></v-divider>
-
-    <v-card-actions>
-      <v-btn @click="toggleExpanded">{{ expanded ? $t('Collapse') : $t('Expand') }}</v-btn>
-      <v-btn @click="onClickAnalyzeIdScores">{{ $t('Analyze') }}</v-btn>
-      <v-overlay v-model="showScoreDiagram" class="align-center justify-center">
-        <IdScoreDiagram :node="node"></IdScoreDiagram>
-      </v-overlay>
-
-      <v-spacer></v-spacer>
-
-      <v-btn
-        :icon="expanded ? 'mdi-chevron-up' : 'mdi-chevron-down'"
-        @click="toggleExpanded"
-      ></v-btn>
-    </v-card-actions>
   </v-card>
 </template>
 
