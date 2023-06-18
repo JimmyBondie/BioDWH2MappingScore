@@ -9,8 +9,16 @@ import { useDisplay, useLocale, useTheme } from 'vuetify'
     <v-locale-provider :locale="language">
       <v-theme-provider :theme="theme">
         <v-toolbar>
-          <v-img v-if="useDisplay().width.value >= 550" src="./Logo.svg" max-width="170"></v-img>
-          <v-toolbar-title>Mapping-Spy</v-toolbar-title>
+          <router-link to="/" custom v-slot="{ navigate }">
+            <v-img
+              class="cursor-pointer"
+              @click="navigate"
+              v-if="useDisplay().width.value >= 550"
+              src="./Logo.svg"
+              max-width="170"
+            ></v-img>
+            <v-toolbar-title class="cursor-pointer" @click="navigate">Mapping-Spy</v-toolbar-title>
+          </router-link>
 
           <v-menu>
             <template v-slot:activator="{ props: menu }">
@@ -142,5 +150,9 @@ html {
       color: inherit;
     }
   }
+}
+
+.cursor-pointer {
+  cursor: pointer;
 }
 </style>

@@ -1,10 +1,7 @@
 <script setup lang="ts">
 import { MappingNodeList } from '@/lib/classes'
 import MappingTree from '@/components/MappingTree.vue'
-
-defineProps<{
-  nodeList: MappingNodeList
-}>()
+import { MappingManager } from '@/lib/manager'
 </script>
 
 <template>
@@ -33,6 +30,9 @@ defineProps<{
 export default {
   data() {
     return {
+      nodeList: MappingManager.instance.nodesPerLabel.get(
+        this.$route.params['label'] as string
+      ) as MappingNodeList,
       selectedNode: null
     }
   }

@@ -2,6 +2,9 @@ import { MappingNode, MappingNodeList } from './classes'
 
 export class MappingManager extends Map<number, MappingNode> {
   public readonly nodesPerLabel: Map<string, MappingNodeList> = new Map()
+  public selectedFiles: File[] = []
+
+  public static readonly instance: MappingManager = new MappingManager()
 
   private calcNodesPerLabel(): void {
     const allNodesAndLabels: Map<string, MappingNodeList> = new Map()

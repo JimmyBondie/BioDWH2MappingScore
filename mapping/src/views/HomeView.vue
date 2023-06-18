@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import LabelBoard from '@/components/LabelBoard.vue'
-import { MappingNodeList } from '@/lib/classes'
+import { MappingManager } from '@/lib/manager'
 </script>
 
 <template>
@@ -12,45 +11,48 @@ import { MappingNodeList } from '@/lib/classes'
         ><v-progress-circular indeterminate size="64" color="primary"></v-progress-circular
       ></v-overlay>
 
-      <v-tabs v-model="labelNodes">
-        <v-tab v-for="label in manager.nodesPerLabel.keys()" :key="label" :value="label">
-          {{ label }}
-        </v-tab>
-      </v-tabs>
+      <v-row>
+        <v-col
+          class="flex-fill"
+          v-for="[label, tree] in MappingManager.instance.nodesPerLabel"
+          :key="label"
+          :value="label"
+          cols="auto"
+        >
+          <router-link :to="'/' + label" custom v-slot="{ navigate }">
+            <v-card
+              @click="navigate"
+              :title="label"
+              :subtitle="$t('Trees') + ': ' + tree.length.toString()"
+            >
+            </v-card>
+          </router-link>
+        </v-col>
+      </v-row>
     </v-container>
-
-    <LabelBoard
-      v-if="labelNodes != '' && selectedFile.length > 0"
-      :nodeList="(manager.nodesPerLabel.get(labelNodes) as MappingNodeList)"
-    ></LabelBoard>
   </main>
 </template>
 
 <script lang="ts">
-import { MappingManager } from '@/lib/manager'
 export default {
   data() {
     return {
       inProgress: false,
-      selectedFile: [],
-      labelNodes: '',
-      manager: new MappingManager()
+      selectedFile: MappingManager.instance.selectedFiles
     }
   },
   watch: {
     async selectedFile([file]: File[]) {
+      MappingManager.instance.selectedFiles = this.selectedFile
       if (!file) {
-        this.selectedFile = []
-        this.manager.clear()
-        this.manager.nodesPerLabel.clear()
+        MappingManager.instance.clear()
+        MappingManager.instance.nodesPerLabel.clear()
         return
       }
-
-      this.labelNodes = ''
       this.inProgress = true
       try {
         const text: string = await file.text()
-        this.manager.load(text)
+        MappingManager.instance.load(text)
       } finally {
         this.inProgress = false
       }
