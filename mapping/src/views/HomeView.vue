@@ -6,7 +6,7 @@ import { MappingNodeList } from '@/lib/classes'
 <template>
   <main>
     <v-container>
-      <v-file-input accept=".json" :label="$t('UploadFile')" v-model="selectedFile"></v-file-input>
+      <v-file-input accept=".json" :label="$t('SelectFile')" v-model="selectedFile"></v-file-input>
 
       <v-overlay v-model="inProgress" persistent class="align-center justify-center"
         ><v-progress-circular indeterminate size="64" color="primary"></v-progress-circular
