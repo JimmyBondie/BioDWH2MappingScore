@@ -1,6 +1,6 @@
 import { abs, mean, std } from 'mathjs'
 
-class Map2Dim<K, V> extends Map<K, Map<K, V>> {
+export class Map2Dim<K, V> extends Map<K, Map<K, V>> {
   public getValue(key1: K, key2: K): V | undefined {
     if (!this.has(key1)) {
       this.set(key1, new Map())

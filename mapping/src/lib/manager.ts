@@ -1,7 +1,19 @@
-import { MappingNode, MappingNodeList } from './classes'
+import { MappingNode, MappingNodeList, Map2Dim } from './classes'
+
+class GlobalAnalysisData extends Map2Dim<string, MappingNodeList> {
+  public getInitializedValue(key1: string, key2: string): MappingNodeList {
+    let result: MappingNodeList | undefined = this.getValue(key1, key2)
+    if (result === undefined) {
+      result = new MappingNodeList()
+      this.setValue(key1, key2, result)
+    }
+    return result
+  }
+}
 
 export class MappingManager extends Map<number, MappingNode> {
   public readonly nodesPerLabel: Map<string, MappingNodeList> = new Map()
+  public readonly globalAnalysis: GlobalAnalysisData = new GlobalAnalysisData()
   public selectedFiles: File[] = []
 
   public static readonly instance: MappingManager = new MappingManager()
@@ -28,6 +40,17 @@ export class MappingManager extends Map<number, MappingNode> {
     }
   }
 
+  private calcGlobalAnalysis(): void {
+    for (const [label, nodes] of this.nodesPerLabel) {
+      for (const node of nodes) {
+        for (const prefix of node.getBadPrefixes()) {
+          const nodeList: MappingNodeList = this.globalAnalysis.getInitializedValue(label, prefix)
+          nodeList.push(node)
+        }
+      }
+    }
+  }
+
   public load(json: string): void {
     this.clear()
     this.nodesPerLabel.clear()
@@ -40,5 +63,6 @@ export class MappingManager extends Map<number, MappingNode> {
       }
     }
     this.calcNodesPerLabel()
+    this.calcGlobalAnalysis()
   }
 }

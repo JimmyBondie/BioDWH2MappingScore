@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { MappingManager } from '@/lib/manager'
+import GlobalAnalysis from '@/components/GlobalAnalysis.vue'
 </script>
 
 <template>
@@ -29,6 +30,11 @@ import { MappingManager } from '@/lib/manager'
           </router-link>
         </v-col>
       </v-row>
+
+      <GlobalAnalysis
+        class="mt-10"
+        v-if="MappingManager.instance.nodesPerLabel.size > 0"
+      ></GlobalAnalysis>
     </v-container>
   </main>
 </template>
