@@ -54,6 +54,7 @@ export class MappingManager extends Map<number, MappingNode> {
   public load(json: string): void {
     this.clear()
     this.nodesPerLabel.clear()
+    this.globalAnalysis.clear()
     const lines: string[] = json.split('\n')
     const objects = lines.map((line) => JSON.parse(line))
     for (const object of objects) {

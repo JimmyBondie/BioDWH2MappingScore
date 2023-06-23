@@ -32,6 +32,7 @@ import GlobalAnalysis from '@/components/GlobalAnalysis.vue'
       </v-row>
 
       <GlobalAnalysis
+        :key="analysisKey"
         class="mt-10"
         v-if="MappingManager.instance.nodesPerLabel.size > 0"
       ></GlobalAnalysis>
@@ -44,21 +45,24 @@ export default {
   data() {
     return {
       inProgress: false,
-      selectedFile: MappingManager.instance.selectedFiles
+      selectedFile: MappingManager.instance.selectedFiles,
+      analysisKey: 0
     }
   },
   watch: {
     async selectedFile([file]: File[]) {
-      MappingManager.instance.selectedFiles = this.selectedFile
+      const manager: MappingManager = MappingManager.instance
+      manager.selectedFiles = this.selectedFile
       if (!file) {
-        MappingManager.instance.clear()
-        MappingManager.instance.nodesPerLabel.clear()
+        manager.clear()
+        manager.nodesPerLabel.clear()
         return
       }
       this.inProgress = true
       try {
         const text: string = await file.text()
-        MappingManager.instance.load(text)
+        manager.load(text)
+        this.analysisKey++
       } finally {
         this.inProgress = false
       }
