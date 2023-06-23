@@ -43,7 +43,7 @@ import { MappingManager } from '@/lib/manager'
                   <router-link
                     v-for="node of nodes"
                     :key="node.id"
-                    :to="'/' + label + '/' + node.id"
+                    :to="{ path: '/' + label, query: { node: node.id } }"
                     custom
                     v-slot="{ navigate }"
                   >
