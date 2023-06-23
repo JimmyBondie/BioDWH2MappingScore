@@ -172,11 +172,10 @@ export class MappingNode {
 
     const meanScore: number = mean(scores)
     const stdDeviation: number = std(scores, 'unbiased') // 'unbiased' is default
-    const maxDelta: number = 2 * stdDeviation
 
     const badPrefixes: Array<string> = []
     for (const prefix of this.getPrefixes()) {
-      if (abs(meanScore - this.getScore(prefix)) > maxDelta) {
+      if (abs(meanScore - this.getScore(prefix)) > stdDeviation) {
         badPrefixes.push(prefix)
       }
     }
