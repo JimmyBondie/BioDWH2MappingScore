@@ -171,7 +171,7 @@ export class MappingNode {
     }
 
     const meanScore: number = mean(scores)
-    const stdDeviation: number = std(scores, 'unbiased') // 'unbiased' is default
+    const stdDeviation: number = std(scores, 'unbiased') as number // 'unbiased' is default
 
     const badPrefixes: Array<string> = []
     for (const prefix of this.getPrefixes()) {
