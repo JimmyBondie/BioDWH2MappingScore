@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { MappingManager } from '@/lib/manager'
+import store from '@/store'
 </script>
 
 <template>
@@ -9,7 +9,7 @@ import { MappingManager } from '@/lib/manager'
     <div class="d-flex flex-row">
       <v-tabs v-model="selectedLabel" direction="vertical">
         <v-tab
-          v-for="label in MappingManager.instance.globalAnalysis.keys()"
+          v-for="label in store.state.globalAnalysis.keys()"
           :key="label"
           :value="label"
           :text="label"
@@ -21,7 +21,7 @@ import { MappingManager } from '@/lib/manager'
 
       <v-window class="w-100" v-model="selectedLabel">
         <v-window-item
-          v-for="[label, prefixList] of MappingManager.instance.globalAnalysis"
+          v-for="[label, prefixList] of store.state.globalAnalysis"
           :key="label"
           :value="label"
         >

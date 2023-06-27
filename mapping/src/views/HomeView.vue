@@ -1,12 +1,13 @@
 <script setup lang="ts">
-import { MappingManager } from '@/lib/manager'
 import GlobalAnalysis from '@/components/GlobalAnalysis.vue'
+import store from '@/store'
+import { mapMutations } from 'vuex'
 </script>
 
 <template>
   <main>
     <v-container>
-      <v-file-input accept=".json" :label="$t('SelectFile')" v-model="selectedFile"></v-file-input>
+      <v-file-input accept=".json" :label="$t('SelectFile')" v-model="selectedFiles"></v-file-input>
 
       <v-overlay v-model="inProgress" persistent class="align-center justify-center"
         ><v-progress-circular indeterminate size="64" color="primary"></v-progress-circular
@@ -15,7 +16,7 @@ import GlobalAnalysis from '@/components/GlobalAnalysis.vue'
       <v-row>
         <v-col
           class="flex-fill"
-          v-for="[label, tree] in MappingManager.instance.nodesPerLabel"
+          v-for="[label, tree] in store.state.nodesPerLabel"
           :key="label"
           :value="label"
           cols="auto"
@@ -34,7 +35,7 @@ import GlobalAnalysis from '@/components/GlobalAnalysis.vue'
       <GlobalAnalysis
         :key="analysisKey"
         class="mt-10"
-        v-if="MappingManager.instance.nodesPerLabel.size > 0"
+        v-if="store.state.nodesPerLabel.size > 0"
       ></GlobalAnalysis>
     </v-container>
   </main>
@@ -45,23 +46,25 @@ export default {
   data() {
     return {
       inProgress: false,
-      selectedFile: MappingManager.instance.selectedFiles,
+      selectedFiles: store.state.selectedFiles,
       analysisKey: 0
     }
   },
+  methods: {
+    ...mapMutations(['loadNodes', 'setSelectedFiles', 'clearNodes'])
+  },
   watch: {
-    async selectedFile([file]: File[]) {
-      const manager: MappingManager = MappingManager.instance
-      manager.selectedFiles = this.selectedFile
+    async selectedFiles([file]: File[]) {
+      this.setSelectedFiles(this.selectedFiles)
       if (!file) {
-        manager.clear()
-        manager.nodesPerLabel.clear()
+        this.clearNodes()
         return
       }
+
       this.inProgress = true
       try {
         const text: string = await file.text()
-        manager.load(text)
+        this.loadNodes(text)
         this.analysisKey++
       } finally {
         this.inProgress = false

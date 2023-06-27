@@ -40,8 +40,12 @@ import { TitleComponent, TooltipComponent, GridComponent } from 'echarts/compone
 import { BarChart, TreeChart } from 'echarts/charts'
 use([SVGRenderer, TitleComponent, TooltipComponent, GridComponent, BarChart, TreeChart])
 
+// Vue Store
+import store from './store'
+
 const app = createApp(App)
 app.use(router)
 app.use(i18n)
 app.use(vuetify)
+app.use(store)
 app.mount('#app')
