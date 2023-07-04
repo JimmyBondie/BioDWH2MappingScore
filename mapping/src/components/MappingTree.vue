@@ -29,7 +29,10 @@ defineProps<{
           </div>
         </td>
 
-        <td v-bind:class="{ borderLeft: node.children.length > 0 }" class="pa-4 minimumCol">
+        <td
+          v-bind:class="{ borderLeft: node.children.length > 0 }"
+          class="pa-4 minimumCol align-top"
+        >
           <SimpleMappingNode
             :node="node"
             :selected-node-ids="internalSelectedNodeIds"
@@ -64,5 +67,9 @@ export default {
 
 .borderBottom {
   border-bottom: thin solid rgba(var(--v-border-color), var(--v-border-opacity));
+}
+
+.align-top {
+  vertical-align: baseline;
 }
 </style>
