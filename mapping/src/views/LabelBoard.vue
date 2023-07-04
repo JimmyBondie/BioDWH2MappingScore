@@ -6,8 +6,10 @@ import { LocationQueryValue } from 'vue-router'
 
 <template>
   <main>
-    <v-container>
-      <v-select :label="$t('SelectNode')" :items="nodeList" v-model="selectedNode">
+    <v-container class="d-flex align-center">
+      <h1 class="mr-4">{{ getLabel() }}</h1>
+
+      <v-select :label="$t('SelectNode')" :items="nodeList" v-model="selectedNode" hide-details>
         <template v-slot:selection="{ item }">
           {{ item.value.id + ' (' + item.value.ids.length + ' ' + $t('Ids') + ')' }}
         </template>
@@ -36,12 +38,17 @@ export default {
     selectedNode: MappingNode | undefined
   } {
     return {
-      nodeList: store.getters.getNodesByLabel(this.$route.params['label'] as string),
+      nodeList: store.getters.getNodesByLabel(this.getLabel()),
       selectedNode: undefined
     }
   },
   computed: {
     ...mapGetters(['getNode'])
+  },
+  methods: {
+    getLabel(): string {
+      return this.$route.params['label'] as string
+    }
   },
   created() {
     const id: LocationQueryValue = this.$route.query['node'] as LocationQueryValue
