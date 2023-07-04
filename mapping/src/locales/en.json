@@ -7,6 +7,7 @@
   "Documentation": "Documentation",
   "Expand": "Expand",
   "FacultyOfTechnology": "Faculty of Technology",
+  "GlobalAnalysisHelp": "The global analysis shows you at first glance which mappings are potentially error-prone. The score gives a guideline for the severity (the higher the more severe).",
   "Ids": "Id's",
   "Names": "Names",
   "Prefixes": "Prefixes",

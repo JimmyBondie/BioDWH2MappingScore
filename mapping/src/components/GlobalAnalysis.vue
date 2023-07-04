@@ -4,7 +4,20 @@ import store from '@/store'
 
 <template>
   <v-card>
-    <v-toolbar color="primary" :title="$t('Analysis')"></v-toolbar>
+    <v-toolbar color="primary">
+      <v-toolbar-title>{{ $t('Analysis') }}</v-toolbar-title>
+
+      <v-spacer></v-spacer>
+
+      <v-btn icon="mdi-information-variant-circle-outline" @click="showInformation = true"></v-btn>
+
+      <v-snackbar v-model="showInformation">
+        {{ $t('GlobalAnalysisHelp') }}
+        <template v-slot:actions>
+          <v-btn icon="mdi-close" color="red" @click="showInformation = false"></v-btn>
+        </template>
+      </v-snackbar>
+    </v-toolbar>
 
     <div class="d-flex flex-row">
       <v-tabs v-model="selectedLabel" direction="vertical">
@@ -70,7 +83,8 @@ export default {
   data() {
     return {
       selectedLabel: null,
-      selectedPrefix: null
+      selectedPrefix: null,
+      showInformation: false
     }
   }
 }

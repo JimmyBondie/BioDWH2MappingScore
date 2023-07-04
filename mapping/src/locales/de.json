@@ -7,6 +7,7 @@
   "Documentation": "Dokumentation",
   "Expand": "Erweitern",
   "FacultyOfTechnology": "Technische Fakultät",
+  "GlobalAnalysisHelp": "Die globale Analyse zeigt Ihnen auf den ersten Blick, welche Zuordnungen potenziell fehlerbehaftet sind. Die Punktzahl gibt dabei einen Richtwert für den Schweregrad an (je höher desto schwerer).",
   "Ids": "Ids",
   "Names": "Namen",
   "Prefixes": "Präfixe",
