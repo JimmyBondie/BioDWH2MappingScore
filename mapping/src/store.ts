@@ -1,5 +1,6 @@
 import { Store, createStore } from 'vuex'
 import { Map2Dim, MappingNode, MappingNodeList } from './lib/classes'
+import { compareNatural } from 'mathjs'
 
 class GlobalAnalysisData extends Map2Dim<string, MappingNodeList> {
   public getInitializedValue(key1: string, key2: string): MappingNodeList {
@@ -9,6 +10,16 @@ class GlobalAnalysisData extends Map2Dim<string, MappingNodeList> {
       this.setValue(key1, key2, result)
     }
     return result
+  }
+
+  public sort(): void {
+    for (const prefixList of this.values()) {
+      for (const [prefix, nodeList] of prefixList) {
+        nodeList.sort(
+          (nodeA, nodeB) => -1 * compareNatural(nodeA.getScore(prefix), nodeB.getScore(prefix))
+        )
+      }
+    }
   }
 }
 
@@ -48,6 +59,8 @@ class StoreState extends Map<number, MappingNode> {
         }
       }
     }
+
+    this.globalAnalysis.sort()
   }
 }
 
