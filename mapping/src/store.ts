@@ -88,14 +88,16 @@ const store: Store<StoreState> = createStore({
       state.clear()
       state.nodesPerLabel.clear()
       state.globalAnalysis.clear()
+
       const lines: string[] = json.split('\n')
-      const objects = lines.map((line) => JSON.parse(line))
-      for (const object of objects) {
+      for (const line of lines) {
+        const object = JSON.parse(line)
         const node: MappingNode = new MappingNode(object)
         if (node.children.length > 2) {
           state.set(node.id, node)
         }
       }
+
       state.calcNodesPerLabel()
       state.calcGlobalAnalysis()
     },
