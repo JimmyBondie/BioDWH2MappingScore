@@ -32,6 +32,7 @@ import {
   EChartsOption,
   XAXisOption
 } from 'echarts/types/dist/shared'
+import { compareNatural } from 'mathjs'
 
 export default {
   data() {
@@ -71,7 +72,12 @@ export default {
       }
 
       const badPrefixes: Array<string> = this.node.getBadPrefixes()
-      for (const prefix of this.node.getPrefixes()) {
+      const prefixes: Array<string> = this.node.getPrefixes()
+      prefixes.sort((prefixA, prefixB) =>
+        compareNatural(this.node.getScore(prefixA), this.node.getScore(prefixB))
+      )
+
+      for (const prefix of prefixes) {
         xAxis.data?.push(prefix)
 
         if (badPrefixes.includes(prefix)) {

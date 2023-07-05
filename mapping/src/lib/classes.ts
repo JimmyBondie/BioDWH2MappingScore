@@ -120,12 +120,17 @@ export class MappingNode {
     return false
   }
 
-  public getPrefixes(): IterableIterator<string> {
-    const result: Map<string, string> = new Map()
+  public getPrefixes(): Array<string> {
+    const map: Map<string, string> = new Map()
     for (const id of this.ids) {
-      result.set(id.prefix, '')
+      map.set(id.prefix, '')
     }
-    return result.keys()
+
+    const result: Array<string> = new Array()
+    for (const prefix of map.keys()) {
+      result.push(prefix)
+    }
+    return result
   }
 
   private calcPrefixBySource(map: Map2Dim<string, number>): void {
