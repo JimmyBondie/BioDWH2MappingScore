@@ -97,6 +97,8 @@ export class MappingNode {
   public readonly children: MappingNodeList
 
   private scores: Map<string, ScoreData>
+  private namesSorted: boolean
+  private idsSorted: boolean
 
   constructor(json: any) {
     this.id = json['id']
@@ -109,6 +111,8 @@ export class MappingNode {
     this.children.load(json['children'])
 
     this.scores = new Map()
+    this.namesSorted = false
+    this.idsSorted = false
   }
 
   public hasPrefix(prefix: string): boolean {
@@ -131,6 +135,24 @@ export class MappingNode {
       result.push(prefix)
     }
     return result
+  }
+
+  public getSortedNames(): Array<string> {
+    if (!this.namesSorted) {
+      const comparer: Intl.Collator = new Intl.Collator(undefined, { sensitivity: 'base' })
+      this.names.sort((name1, name2) => comparer.compare(name1, name2))
+      this.namesSorted = true
+    }
+    return this.names
+  }
+
+  public getSortedIds(): MappingNodeIdList {
+    if (!this.idsSorted) {
+      const comparer: Intl.Collator = new Intl.Collator(undefined, { sensitivity: 'base' })
+      this.ids.sort((id1, id2) => comparer.compare(id1.value, id2.value))
+      this.idsSorted = true
+    }
+    return this.ids
   }
 
   private calcPrefixBySource(map: Map2Dim<string, number>): void {
