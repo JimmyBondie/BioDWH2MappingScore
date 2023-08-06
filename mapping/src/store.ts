@@ -2,7 +2,7 @@ import { Store, createStore } from 'vuex'
 import { Map2Dim, MappingNode, MappingNodeList } from './lib/classes'
 import { compareNatural } from 'mathjs'
 
-class GlobalAnalysisData extends Map2Dim<string, MappingNodeList> {
+class GroupedPrefixList extends Map2Dim<string, MappingNodeList> {
   public getInitializedValue(key1: string, key2: string): MappingNodeList {
     let result: MappingNodeList | undefined = this.getValue(key1, key2)
     if (result === undefined) {
@@ -25,7 +25,8 @@ class GlobalAnalysisData extends Map2Dim<string, MappingNodeList> {
 
 class StoreState extends Map<number, MappingNode> {
   public nodesPerLabel: Map<string, MappingNodeList> = new Map()
-  public globalAnalysis: GlobalAnalysisData = new GlobalAnalysisData()
+  public globalAnalysis: GroupedPrefixList = new GroupedPrefixList()
+  public blamingSources: GroupedPrefixList = new GroupedPrefixList()
   public selectedFiles: File[] = []
 
   calcNodesPerLabel(): void {
@@ -61,6 +62,24 @@ class StoreState extends Map<number, MappingNode> {
     }
 
     this.globalAnalysis.sort()
+  }
+
+  calcBlamingSources(): void {
+    for (const labeledNodes of this.nodesPerLabel.values()) {
+      for (const node of labeledNodes) {
+        for (const [prefix, sources] of node.getBadSourcesByPrefix()) {
+          for (const source of sources) {
+            const nodeList: MappingNodeList = this.blamingSources.getInitializedValue(
+              source,
+              prefix
+            )
+            nodeList.push(node)
+          }
+        }
+      }
+    }
+
+    this.blamingSources.sort()
   }
 }
 
@@ -100,6 +119,7 @@ const store: Store<StoreState> = createStore({
 
       state.calcNodesPerLabel()
       state.calcGlobalAnalysis()
+      state.calcBlamingSources()
     },
     clearNodes(state: StoreState): void {
       state.clear()

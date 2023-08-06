@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import GlobalAnalysis from '@/components/GlobalAnalysis.vue'
+import BlamingCard from '@/components/BlamingCard.vue'
 import store from '@/store'
 import { mapMutations } from 'vuex'
 </script>
@@ -37,6 +38,12 @@ import { mapMutations } from 'vuex'
         class="mt-10"
         v-if="store.state.nodesPerLabel.size > 0"
       ></GlobalAnalysis>
+
+      <BlamingCard
+        :key="blamingKey"
+        class="mt-10"
+        v-if="store.state.nodesPerLabel.size > 0"
+      ></BlamingCard>
     </v-container>
   </main>
 </template>
@@ -47,7 +54,8 @@ export default {
     return {
       inProgress: false,
       selectedFiles: store.state.selectedFiles,
-      analysisKey: 0
+      analysisKey: 0,
+      blamingKey: 0
     }
   },
   methods: {
@@ -66,6 +74,7 @@ export default {
         const text: string = await file.text()
         this.loadNodes(text)
         this.analysisKey++
+        this.blamingKey++
       } finally {
         this.inProgress = false
       }

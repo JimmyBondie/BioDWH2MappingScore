@@ -84,7 +84,12 @@ export class MappingNodeLabel {
 
   constructor(json: any) {
     this.value = json
-    ;[this.source, this.name] = json.split('_')
+    if (this.value.includes('_')) {
+      ;[this.source, this.name] = json.split('_')
+    } else {
+      this.source = ''
+      this.name = json
+    }
   }
 }
 
@@ -208,6 +213,49 @@ export class MappingNode {
     }
 
     return badPrefixes
+  }
+
+  private getSourcesByPrefix(prefix: string): Array<string> {
+    const array: Array<string> = new Array()
+
+    let childFound: boolean = false
+    for (const child of this.children) {
+      if (child.hasPrefix(prefix) && child.getBadPrefixes().includes(prefix)) {
+        childFound = true
+        for (const source of child.getSourcesByPrefix(prefix)) {
+          if (!array.includes(source)) {
+            array.push(source)
+          }
+        }
+      }
+    }
+
+    if (!childFound) {
+      const source: string = this.label.source
+      if (source != '') {
+        if (!array.includes(source)) array.push(source)
+      }
+
+      for (const child of this.children) {
+        if (child.hasPrefix(prefix)) {
+          for (const source of child.getSourcesByPrefix(prefix)) {
+            if (!array.includes(source)) {
+              array.push(source)
+            }
+          }
+        }
+      }
+    }
+
+    return array
+  }
+
+  public getBadSourcesByPrefix(): Map<string, Array<string>> {
+    const map: Map<string, Array<string>> = new Map()
+    for (const prefix of this.getBadPrefixes()) {
+      map.set(prefix, this.getSourcesByPrefix(prefix))
+    }
+    return map
   }
 }
 
