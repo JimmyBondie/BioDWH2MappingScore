@@ -62,7 +62,7 @@ import store from '@/store'
                   >
                     <span @click="navigate">
                       <v-list-item
-                        :title="node.id"
+                        :title="node.label.name + ' (' + node.id + ')'"
                         :subtitle="$t('Score') + ': ' + node.getScore(prefix)"
                         :value="node"
                       ></v-list-item>
