@@ -40,12 +40,12 @@ import store from '@/store'
         >
           <div class="d-flex flex-row">
             <v-tabs v-model="selectedPrefix" direction="vertical">
-              <v-tab
-                v-for="prefix in prefixList.keys()"
-                :key="prefix"
-                :value="prefix"
-                :text="prefix"
-              ></v-tab>
+              <v-tab v-for="prefix in prefixList.keys()" :key="prefix" :value="prefix">
+                {{ prefix }}
+                <v-chip size="x-small">
+                  {{ prefixList.get(prefix)?.length }}
+                </v-chip>
+              </v-tab>
             </v-tabs>
 
             <v-divider vertical></v-divider>
