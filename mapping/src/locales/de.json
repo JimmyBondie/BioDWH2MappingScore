@@ -6,6 +6,7 @@
   "BlamingHelp": "Kritische Datenquellen führen zu einer Verklumpung und damit zu einem potenziell schlechteren Mapping. Entfernen Sie diese Quellen um das Ergebnis zu verbessern.",
   "Collapse": "Zuklappen",
   "CriticalDataSources": "Kritische Datenquellen",
+  "CriticalNodesRootOccurrences": "Wurde hier %0-mal verwendet, insgesamt %1-mal",
   "Documentation": "Dokumentation",
   "Expand": "Erweitern",
   "FacultyOfTechnology": "Technische Fakultät",

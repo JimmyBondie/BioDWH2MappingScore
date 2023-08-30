@@ -22,6 +22,17 @@ export class Map2Dim<K, V> extends Map<K, Map<K, V>> {
   }
 }
 
+export class Map2DimNumber<K> extends Map2Dim<K, number> {
+  public addMap(map: Map2DimNumber<K>): void {
+    for (const [key1, value1] of map.entries()) {
+      for (const [key2, value2] of value1.entries()) {
+        const old: number = this.getValue(key1, key2) || 0
+        this.setValue(key1, key2, old + value2)
+      }
+    }
+  }
+}
+
 export class ScoreData {
   private allIds: number
   private countAllNodes: number
@@ -187,6 +198,35 @@ export class MappingNode {
         this.scores.set(prefix, new ScoreData(this.ids.length, prefixBySource.get(prefix)))
       }
     }
+  }
+
+  public getRootOccurrences(source: string, prefix: string): number {
+    let result: number = 0
+    if (this.children.length == 0) {
+      if (this.label.source == source && this.hasPrefix(prefix)) {
+        result = 1
+      }
+    } else if (this.hasPrefix(prefix)) {
+      for (const node of this.children) {
+        result += node.getRootOccurrences(source, prefix)
+      }
+    }
+
+    return result
+  }
+
+  public getAllRootOccurrences(): Map2DimNumber<string> {
+    const result: Map2DimNumber<string> = new Map2DimNumber()
+    if (this.children.length == 0) {
+      for (const id of this.ids) {
+        result.setValue(this.label.source, id.prefix, 1)
+      }
+    } else {
+      for (const node of this.children) {
+        result.addMap(node.getAllRootOccurrences())
+      }
+    }
+    return result
   }
 
   public getScore(prefix: string): number {

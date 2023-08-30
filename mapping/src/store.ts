@@ -1,5 +1,5 @@
 import { Store, createStore } from 'vuex'
-import { Map2Dim, MappingNode, MappingNodeList } from './lib/classes'
+import { Map2Dim, Map2DimNumber, MappingNode, MappingNodeList } from './lib/classes'
 import { compareNatural } from 'mathjs'
 
 class GroupedPrefixList extends Map2Dim<string, MappingNodeList> {
@@ -27,6 +27,7 @@ class StoreState extends Map<number, MappingNode> {
   public nodesPerLabel: Map<string, MappingNodeList> = new Map()
   public globalAnalysis: GroupedPrefixList = new GroupedPrefixList()
   public blamingSources: GroupedPrefixList = new GroupedPrefixList()
+  public rootOccurrences: Map2DimNumber<string> = new Map2DimNumber()
   public selectedFiles: File[] = []
 
   calcNodesPerLabel(): void {
@@ -81,6 +82,14 @@ class StoreState extends Map<number, MappingNode> {
 
     this.blamingSources.sort()
   }
+
+  calcRootOccurrences(): void {
+    for (const nodeList of this.nodesPerLabel.values()) {
+      for (const node of nodeList) {
+        this.rootOccurrences.addMap(node.getAllRootOccurrences())
+      }
+    }
+  }
 }
 
 const store: Store<StoreState> = createStore({
@@ -97,7 +106,10 @@ const store: Store<StoreState> = createStore({
       (state: StoreState) =>
       (label: string): MappingNodeList | undefined => {
         return state.nodesPerLabel.get(label)
-      }
+      },
+    countRootOccurrences: (state: StoreState) => (source: string, prefix: string) => {
+      return state.rootOccurrences.getValue(source, prefix)
+    }
   },
   mutations: {
     setSelectedFiles(state: StoreState, selectedFiles: File[]): void {
@@ -107,6 +119,7 @@ const store: Store<StoreState> = createStore({
       state.clear()
       state.nodesPerLabel.clear()
       state.globalAnalysis.clear()
+      state.rootOccurrences.clear()
 
       const lines: string[] = json.split('\n')
       for (const line of lines) {
@@ -120,11 +133,13 @@ const store: Store<StoreState> = createStore({
       state.calcNodesPerLabel()
       state.calcGlobalAnalysis()
       state.calcBlamingSources()
+      state.calcRootOccurrences()
     },
     clearNodes(state: StoreState): void {
       state.clear()
       state.nodesPerLabel.clear()
       state.globalAnalysis.clear()
+      state.rootOccurrences.clear()
     }
   }
 })

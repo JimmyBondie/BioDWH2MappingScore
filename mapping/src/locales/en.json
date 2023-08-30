@@ -6,6 +6,7 @@
   "BlamingHelp": "Critical data sources lead to clumping and therefore potentially worse mapping. Remove these sources to improve the result.",
   "Collapse": "Collapse",
   "CriticalDataSources": "Critical data sources",
+  "CriticalNodesRootOccurrences": "Was used here %0 times, total %1 times",
   "Documentation": "Documentation",
   "Expand": "Expand",
   "FacultyOfTechnology": "Faculty of Technology",

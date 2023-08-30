@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import store from '@/store'
+import { mapGetters } from 'vuex'
+import { MappingNodeList } from '@/lib/classes'
 </script>
 
 <template>
@@ -52,6 +54,12 @@ import store from '@/store'
 
             <v-window class="w-100" v-model="selectedPrefix">
               <v-window-item v-for="[prefix, nodes] of prefixList" :key="prefix" :value="prefix">
+                <v-toolbar>
+                  <v-toolbar-title>
+                    {{ getCriticalNodesAllOccurrencesText(nodes) }}
+                  </v-toolbar-title>
+                </v-toolbar>
+
                 <v-list class="pa-0 w-100" lines="one">
                   <router-link
                     v-for="node of nodes"
@@ -82,9 +90,28 @@ import store from '@/store'
 export default {
   data() {
     return {
-      selectedSource: null,
-      selectedPrefix: null,
+      selectedSource: '',
+      selectedPrefix: '',
       showInformation: false
+    }
+  },
+  computed: {
+    ...mapGetters(['countRootOccurrences'])
+  },
+  methods: {
+    getCriticalNodesAllOccurrencesText(nodeList: MappingNodeList): string {
+      let criticalOccurrences: number = 0
+      for (const node of nodeList) {
+        criticalOccurrences += node.getRootOccurrences(this.selectedSource, this.selectedPrefix)
+      }
+
+      let result: string = this.$t('CriticalNodesRootOccurrences')
+      result = result.replace('%0', criticalOccurrences.toString())
+      result = result.replace(
+        '%1',
+        this.countRootOccurrences(this.selectedSource, this.selectedPrefix) || 0
+      )
+      return result
     }
   }
 }
